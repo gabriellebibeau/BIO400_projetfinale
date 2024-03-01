@@ -3,7 +3,7 @@
     "path": "~/GitHub/BIO400_projetfinale/Script_final.R",
     "project_path": "Script_final.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "2967666088",
     "contents": "",
     "dirty": false,
     "created": 1709312287591.0,
@@ -11,7 +11,9 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "34,1",
+        "scrollLine": "21"
     },
     "folds": "",
     "lastKnownWriteTime": 1709244403,
