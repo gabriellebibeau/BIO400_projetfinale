@@ -1,7 +1,8 @@
 library(deSolve)
 library(ggplot2)
 
-#lotka-voltera de base ----
+#lotka-voltera de base (1) ----
+#fonctions à définir : a', alpha et a (functional response);  phi (recrutement ressource de base);
   #fonction de croissance des proies
   f <- function(N, parmsf = c(r, v)){
   
@@ -65,106 +66,3 @@ test_LV_base <- LV_base(t, Condition_Initiale, parametres_f, parametres_g, param
 #donne un nombre négatif pour dN, peut être flaw, à vérif éventuellement si la suite est erroné aussi
 
 
-#LV avec taux de dispersion ----
-
-#Réutilisation des fonctions g() et f()
-LV_dispersion <- function(t, ConI, parmsf = c(r, v), parmsg = c(b,k), parmsLV = c(e,mu,D_N,D_P)){
-  
-  with(as.list(ConI, parmsLV), {
-    # Lotka-voltera
-    dN <- f(N, parmsf)*N - g(N,P, parmsg)*P + D_N*D(D(N,'x'),'x') #dN/dt
-    dP <- e*g(N,P, parmsg)*P - mu*P + D_P*D(D(P,'x'),'x') #dP/dt
-    
-    # Resultat
-    res <- c(dN = dN, dP = dP)
-    return(list(res))
-  })
-}
-
-#Zone de test LV_dispersion ----
-t <- 10 #aléatoire...
-
-#Conditions initiales arbitraires en proportion
-  N0 <- 0.7 
-  P0 <- 0.3
-  Condition_Initiale <- c(N=N0, P=P0)
-
-#Paramètres selon la figure 1
-  #f()
-    r <- 1
-    v <- 1
-    parametres_f <- c(r=r,v=v)
-
-  #g()
-    b <- 2
-    k <- 1
-    parametres_g <- c(b=b,k=k)
-
-  #LV_base()
-    e <- 0.5
-    mu <- 0.6
-    D_N <- 0.01
-    D_P <- 0.1
-    parametres_LV <- c(e=e,mu=mu)
-
-#test fct
-test_LV_dispersion <- LV_dispersion(t, Condition_Initiale, parametres_f, parametres_g, parametres_LV)
-#même réponse que LV_base, normal?
-
-
-#LV avec taux de dipersion et variables sans dimensions (équations 11 et 12) ----
-
-#le taux de croissance des proies est maintenant inclus dans LV
-
-#Taux de consommation des prédateurs
-g2 <- function(n, p, beta){
-    
-    res_g <- beta*n/(p+n) 
-    return(res_g)
-}
-
-#Lotka voltera avec dispersion et variables sans dimensions qui inclus f2()
-LV_disp_NoDim <- function(t, ConI, parms = c(beta,epsilon,eta,d)){
-  
-  with(as.list(ConI, parms), {
-    # Lotka-voltera
-    dn <- (1-n)*n - g2(n,p,beta)*p + D(D(n,'x'),'x') #dN/dt
-    dp <- epsilon*g2(n,p,beta)*p - eta*p + d*D(D(p,'x'),'x') #dP/dt
-    
-    # Resultat
-    res <- c(dn = dn, dp = dp)
-    return(list(res))
-  })
-}
-
-
-#Zone de test LV_disp_NoDim
-t <- 10 #aléatoire...
-
-#Pré-variables
-N0 <- 0.7 
-P0 <- 0.3
-r <- 1
-v <- 1
-b <- 2
-k <- 1
-e <- 0.5
-mu <- 0.6
-D_N <- 0.01
-D_P <- 0.1
-
-#Conditions initiales
-n0 <- N0/v
-p0 <- P0/pi
-Cond_Ini_NoDim <- c(n=n0,p=p0)
-
-#Paramètres
-beta <- b/(k*r)
-epsilon <- e*k
-eta <- mu/r
-d <- D_P/D_N
-parametres <- c(beta=beta, epsilon=epsilon, eta=eta, d=d)
-
-#test fct
-test_LV_disp_NoDim <- LV_disp_NoDim(t, Cond_Ini_NoDim, parametres)
-#réponses différentes des deux fct précédentes, elles sont positives!
