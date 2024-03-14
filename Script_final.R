@@ -1,6 +1,7 @@
 library(deSolve)
 library(ggplot2)
 
+#je fais une modif
 #lotka-voltera de base (1) ----
 #fonctions à définir : a', alpha et a (functional response);  phi (recrutement ressource de base);
   #fonction de croissance des proies
