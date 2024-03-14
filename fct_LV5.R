@@ -16,7 +16,7 @@ LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,
 
 #Zone de test LV5 ----
 
-#Conditions initiales arbitraires en proportion
+#Conditions initiales arbitraires
 P0 <- 15
 N0 <- 30
 R0 <- 100 - P0 - N0
