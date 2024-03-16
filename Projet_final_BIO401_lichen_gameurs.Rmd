@@ -8,12 +8,42 @@ author: "Les lichens gameurs"
 ##Partie 1
 
 ###Question biologique
+Quelles sont les conséquences d'incorporer la prédation intraguilde (PIG) dans différents modèles de compétition et de prédation?
+
 
 ###Hypothèses
+R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'états alternatifs stables avec l'ajout de PIG dans des modèles préexistant.
+
 
 ###Informations pertinentes
 
 ###Méthodes
+Le modèle Lotka-Voltera avec PIG est définit par le système suivant :
+$$
+\frac{dP}{dt} = P(b'a'R + \beta\alpha N - m')
+$$ ;
+$$
+\frac{dN}{dt} = N(abR + \alpha P - m)
+$$ ;
+$$
+\frac{dR}{dt} = R(r(1 - \frac{R}{K}) + aN - a'P)
+$$ .
+Les variables dans ces équations sont définies comme suit :
+$P$ : la densité du prédateur IG
+$N$ : la densité de la la proie IG
+$R$ : la densité de la ressource commune
+$a$ : asd
+$a'$ : asd
+$\alpha$ : le taux de mortalité de la proie IG causée par le prédateur IG
+$b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie IG
+$b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur IG
+$\beta$ : le taux de conversion de la consommation de la proie IG vers la reproduction du prédateur IG
+$K$ : asd
+$m$ : le taux de mortalité densité-dépendant de la proie IG
+$m'$ : le taux de mortalité densité-dépendant du prédateur IG
+$r$ : asd
+$R$ : asd
+
 
 ###Suppositions
 
