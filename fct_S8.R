@@ -12,27 +12,3 @@ S8 <- function(t, ConI, parms8 = c(alpha,b,b_prime,
     return(list(res))
   })
 }
-
-#Zone de test S8 ----
-
-#Condition initiales arbitraires
-P0 <- 15
-N0 <- 30
-Condition_Initiale <- c(P=P0, N=N0)
-
-#paramètres selon la Figure 1 et mon imagination
-alpha     <- 0.5
-b         <- 1
-b_prime   <- 1
-beta      <- 1
-e         <- 1
-e_prime   <- 1
-I         <- 1
-m         <- 0.5
-m_prime   <- 0.5
-
-para <- c(alpha=alpha,b=b,b_prime=b_prime,beta=beta,e=e,
-          e_prime=e_prime,I=I,m=m,m_prime=m_prime)
-
-test_S8 <- S8(5, Condition_Initiale, para);test_S8
-#même chose que l'autre fonction fct...

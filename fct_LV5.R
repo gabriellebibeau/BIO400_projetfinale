@@ -13,32 +13,3 @@ LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,
     return(list(res))
   })
 }
-
-#Zone de test LV5 ----
-
-#Conditions initiales arbitraires
-P0 <- 15
-N0 <- 30
-R0 <- 100 - P0 - N0
-Condition_Initiale <- c(P=P0, N=N0, R=R0)
-
-#Paramètres selon la figure 1
-a         <- 1
-a_prime   <- 1 #entre 0 et 1 dans la fig1
-alpha     <- 0.5
-b         <- 1
-b_prime   <- 0.25 #entre 0 et 1 dans la fig1
-beta      <- 1
-K         <- 1
-m         <- 0.5
-m_prime   <- 0.5
-r         <- 1
-
-para <- c(a=a,a_prime=a_prime,alpha=alpha,b=b,
-          b_prime=b_prime,beta=beta,K=K,m=m,
-          m_prime=m_prime,r=r)
-
-#test fct
-test_LV5 <- LV5(5, Condition_Initiale, para);test_LV5
-#souvent nombres négatifs, mais j'ai l'impression que c'est juste un 
-#problème de paramètres... À garder en tête pour la suite
