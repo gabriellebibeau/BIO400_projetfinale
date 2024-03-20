@@ -19,44 +19,56 @@ R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'états alternati
 
 
 ###Méthodes
+Les figures dans l'article n'ont été produites qu'avec les modèles basés sur Lotka-Voltera et Schoener auquel des termes associés au PIG ont été ajoutés. Nous avons donc décidé de seulement modéliser ceux-ci.
+
 Le modèle Lotka-Voltera avec PIG est définit par le système suivant :
 $$
-\frac{dP}{dt} = P(b'a'R + \beta\alpha N - m')
-$$ ;
+\frac{dP}{dt} = P(b'a'R + \beta\alpha N - m');
+$$ 
 $$
-\frac{dN}{dt} = N(abR + \alpha P - m)
-$$ ;
+\frac{dN}{dt} = N(abR - \alpha P - m);
+$$ 
 $$
-\frac{dR}{dt} = R(r(1 - \frac{R}{K}) + aN - a'P)
-$$ .
+\frac{dR}{dt} = R(r(1 - \frac{R}{K}) - aN - a'P).
+$$ 
 Les variables dans ces équations sont définies comme suit :
 $P$ : la densité du prédateur IG;
 $N$ : la densité de la la proie IG;
 $R$ : la densité de la ressource commune;
-$a$ : la réponse fonctionnelle de la proie IG vers la ressource de base;
-$a'$ : la réponse fonctionnelle du prédateur IG vers la ressource de base;
+$a$ : la réponse fonctionnelle de la proie IG vers la ressource commune;
+$a'$ : la réponse fonctionnelle du prédateur IG vers la ressource commune;
 $\alpha$ : le taux de mortalité de la proie IG causée par le prédateur IG;
 $b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie IG;
 $b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur IG;
 $\beta$ : le taux de conversion de la consommation de la proie IG vers la reproduction du prédateur IG;
-$K$ : la quantité de ressource de base lorsqu'elle est stable;
+$K$ : la quantité de ressource commune lorsqu'elle est stable;
 $m$ : le taux de mortalité densité-dépendant de la proie IG;
 $m'$ : le taux de mortalité densité-dépendant du prédateur IG;
-$r$ : le taux de croissance de la ressource de base.
+$r$ : le taux de croissance de la ressource commune.
+
+L'équation de $\frac{dP}{dt}$ a trois termes multipliés par $P$. Le premier représente les gains en population (reproduction) des prédateurs IG en fonction de la densité de la ressource commune. Le deuxième illustre les gains en population du prédateurs IG grace à la consommation de la proie IG en fonction de la densité de la proie IG. Le dernier terme est simplement le taux de mortalité du prédateurs IG.
+
+L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, sauf en ce qui a trait au deuxième terme. En effet, celui-ci représente le mortalité due au prédateurs IG en fonction de la densité de prédateurs IG.
+
+L'équation de $\frac{dR}{dt}$ a trois termes multipliés par $R$. Le premier est la croissance logistique de la ressource commune dans le système. Les deuxième et troisième termes représentent la consommation de la ressource commune par respectivement la proie IG et le prédateurs IG en fonction de leur densité.
 
 
 Le modèle de Schoener avec PIG est définit par le système suivant :
 $$
-\frac{dP}{dt} = P(\frac{b'e'I}{e'P + eN} + \beta\alpha N - m')
-$$ ;
+\frac{dP}{dt} = P(\frac{b'e'I}{e'P + eN} + \beta\alpha N - m');
+$$ 
 $$
-\frac{dN}{dt} = N(\frac{beI}{e'P + eN} + \alpha P - m)
-$$ .
+\frac{dN}{dt} = N(\frac{beI}{e'P + eN} - \alpha P - m).
+$$ 
 
 Les nouvelles variables dans ces équations sont définies comme suit (les définitions précédentes sont toujours valables) :
-$e$ : l'habileté relative de la proie IG à compétitionner pour la ressource de base;
-$e'$ : l'habileté relative du prédateur IG à compétitionner pour la ressource de base;
-$I$ : le taux d'entrée de la ressource de base dans le système.
+$e$ : l'habileté relative de la proie IG à compétitionner pour la ressource commune;
+$e'$ : l'habileté relative du prédateur IG à compétitionner pour la ressource commune;
+$I$ : le taux d'entrée de la ressource commune dans le système.
+
+L'équation de $\frac{dP}{dt}$ a trois termes multipliés par $P$. Le premier représente la quantité de ressource commune que le prédateur IG est capable d'aller chercher sur la quantité totale et constante de ressource commune entrante en compétitionnant avec la proie IG. Le deuxième illustre les gains en population du prédateurs IG grace à la consommation de la proie IG en fonction de la densité de la proie IG. Le dernier terme est simplement le taux de mortalité du prédateurs IG.
+
+L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, sauf en ce qui a trait au deuxième terme. En effet, celui-ci représente le mortalité due au prédateurs IG en fonction de la densité de prédateurs IG.
 
 
 ###Suppositions
