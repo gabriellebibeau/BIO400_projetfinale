@@ -5,7 +5,7 @@ LV_SPNR <- function(t, ConI, parmsS = c(a_N,a_P,a_S,alpha,b_N,b_P,
   
   with(as.list(ConI, parmsS), {
     # Lotka-voltera
-    dS <- S*(b_S*a_S*R + phi*delta*N + psy*lambda*P- m_S) # dS/dt
+    dS <- S*(b_S*a_S*R + phi*delta*N + psy*lambda*P - m_S) # dS/dt
     dP <- P*(b_P*a_P*R + beta*alpha*N - lambda*S - m_P) # dP/dt
     dN <- N*(a_N*b_N*R- alpha*P - delta*S - m_N) #dN/dt
     dR <- R*(r*(1- (R/K)) - a_N*N - a_P*P - a_S*S) #dR/dt
