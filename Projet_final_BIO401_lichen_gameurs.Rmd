@@ -98,6 +98,10 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 ```
 
 ### Résultats
+Pour le premier modèle (basé sur Lotka-Voltera), nous avons obtenu les figures d'équilibres suivantes : 
+
+
+Pour le deuxième modèle (basé sur Schoener), nous avons obtenu les figures d'équilibres suivantes : 
 
 
 ### Interprétations biologiques
