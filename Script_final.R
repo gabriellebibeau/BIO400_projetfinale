@@ -2,8 +2,6 @@ library(deSolve)
 library(ggplot2)
 library(phaseR)
 
-
-
 #PLAN
 #
 #1. Créer un algorithme pour que le resultat de l'équation avec les paramètres varie en fonction de a prime et b prime (pour chacunes des combinaisons
@@ -129,9 +127,11 @@ for(i in 0:100){
       N_star(param) > 0 &
       P_star(param) > 0){ #Three species coexistence 1st circumstance (yellow)
       figure_1[i+1,j+1] <- 1.5
+      print(paste("Three species coexistence at","a'=", a_prime,"b'=", b_prime))
       
     }else if (Three_species(param, D, R_star, N_star, P_star) == T){ #Three species coexistence 2nd circumstance (yellow)
       figure_1[i+1,j+1] <- 1.5
+      print(paste("Three species coexistence at","a'=", a_prime,"b'=", b_prime))
       
     }else if((a*b*(m_prime/(a_prime*b_prime))-alpha*(r/a_prime)*(1-(m_prime/(a_prime*b_prime*K)))-m) < 0){ #IGprey excluded (blue)
       figure_1[i+1,j+1] <- 2.5
@@ -142,7 +142,7 @@ for(i in 0:100){
     }else if((a*b*(m_prime/(a_prime*b_prime))-alpha*(r/a_prime)*(1-(m_prime/(a_prime*b_prime*K)))-m) > 0 |
             (a_prime*b_prime*(m/(a*b))+alpha*beta*(r/a)*(1-(m/(a*b*K)))-m_prime) > 0){ #Instability (pink)
       figure_1[i+1,j+1] <- 4.5
-  
+      print(paste("Instability at", "a'=", a_prime,"b'=", b_prime))
     }
   }  
 } 
