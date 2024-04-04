@@ -1,0 +1,55 @@
+---
+title: "Réseau trophiques complexes: une étude des équilibres de populations sous l'effet de la prédation intraguilde"
+subtitle: 'Une complexification du modèle présenté par R.D. Holt et G.A. Polis (1996)'
+author: "Les lichens gameurs"
+output: html_document
+#bibliography: Nom_de_groupe.bib
+---
+
+##### **Contact des auteurs**
+ Gabrielle Bibeau : bibg1101@usherbrooke.ca
+ 
+ Zacharie Scalzo : scaz2701@usherbrooke.ca
+ 
+### **Résumé**
+  100 mots max
+
+## Introduction
+Proie-prédateur (Ressource-consommateur)
+
+Les réseaux trophiques 
+  exemple océans
+  Ressource
+  Niveau 1
+  niveau 2
+
+Prédation intraguilde (cas spécifique)
+  Déf
+  ex dans nature?
+  
+
+Modélisation passée
+  Ressource-Consommateur -> précision
+  Lotka-Voltera prédation de base
+    équilibre?
+  Lotka-Voltera prédation avec IG (R.D. Holt et G.A. Polis (1996))
+    équilibre?
+
+
+Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de prédation intraguilde complexe comprenant une ressource et trois utilisateurs et de comparer ces équilibres avec ceux du modèle de R.D. Holt et G.A. Polis (1996) basé sur Lotka-Voltera. Nous croyons que ...
+
+Hypothèses
+  Hyp (2?)
+  Schéma de notre modèle
+  
+
+## Méthode
+Le modèle Lotka-Voltera IG (juste écrit, pas modL) et ses suppositions
+
+Notre modèle et ses suppositions
+
+## Résultats 
+
+Les figures des équilibres
+
+## Discussion
