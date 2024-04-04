@@ -46,7 +46,7 @@ $b'$ : le taux de conversion de la consommation de la ressource vers la reproduc
 $\beta$ : le taux de conversion de la consommation de la proie IG vers la reproduction du prédateur IG;
 $K$ : la quantité de ressource commune lorsqu'elle est stable;
 $m$ : le taux de mortalité densité-dépendant de la proie IG;
-$m'$ : le taux de mortalité densité-dépendant du prÃ©dateur IG;
+$m'$ : le taux de mortalité densité-dépendant du prédateur IG;
 $r$ : le taux de croissance de la ressource commune.
 
 L'équation de $\frac{dP}{dt}$ a trois termes multipliés par $P$. Le premier représente les gains en population (reproduction) des prédateurs IG en fonction de la densité de la ressource commune. Le deuxième illustre les gains en population du prédateurs IG grâce à la consommation de la proie IG en fonction de la densité de la proie IG. Le dernier terme est simplement le taux de mortalité du prédateurs IG.
