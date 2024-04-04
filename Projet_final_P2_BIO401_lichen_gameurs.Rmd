@@ -3,7 +3,7 @@ title: "Réseau trophiques complexes: une étude des équilibres de populations 
 subtitle: 'Une complexification du modèle présenté par R.D. Holt et G.A. Polis (1996)'
 author: "Les lichens gameurs"
 output: html_document
-#bibliography: Nom_de_groupe.bib
+bibliography: BIO401_final.bib
 ---
 
 ##### **Contact des auteurs**
@@ -65,17 +65,34 @@ Notre modèle ajoute plusieurs variables au modèle de R.D. Holt et G.A. Polis (
 $a''$ : la réponse fonctionnelle du prédateur suprême vers la ressource commune;
 $b''$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur suprême;
 $m''$ : le taux de mortalité densité-dépendant du prédateur suprême;
-$\psi$ : 
-$\phi$ : 
-$\lambda$ : 
-$\delta$ : 
+$\psi$ : le taux de conversion de la consommation du prédateur vers la reproduction du prédateur suprême;
+$\phi$ : le taux de conversion de la consommation de la proie vers la reproduction du prédateur suprême;
+$\gamma$ : la réponse fonctionnelle du prédateur suprême vers le prédateur;
+$\delta$ : la réponse fonctionnelle du prédateur suprême vers la proie.
+
+Il est décrit par le système d'équations suivant :
+$$
+\frac{dS}{dt} = S(b''a''R + \phi\delta N - \psi\gamma P - m'');
+$$ 
+$$
+\frac{dP}{dt} = P(b'a'R + \beta\alpha N - \gamma S - m');
+$$ 
+$$
+\frac{dN}{dt} = N(abR - \alpha P - \delta S - m);
+$$ 
+$$
+\frac{dR}{dt} = R(r(1 - \frac{R}{K}) - aN - a'P - a''S).
+$$ 
 
 
 
-ses suppositions
+ses suppositions supplémentaires : bla
 
 ## Résultats 
 
 Les figures des équilibres
 
 ## Discussion
+
+
+## Références
