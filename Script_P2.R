@@ -21,7 +21,7 @@ b_S <- 1
 beta <- 1
 delta <- 1
 K <- 1
-lambda <- 1
+gamma <- 1
 m_N <- 0.1
 m_P <- 0.1
 m_S <- 0.1
@@ -29,7 +29,7 @@ phi <- 0.5
 psi <- 0.5
 r <- 2
 para = c(a_N=a_N,a_P=a_P,a_S=a_S,alpha=alpha,b_N=b_N,b_P=b_P,
-         b_S=b_S,beta=beta,delta=delta,K=K,lambda=lambda,m_N=m_N,
+         b_S=b_S,beta=beta,delta=delta,K=K,gamma=gamma,m_N=m_N,
          m_P=m_P,m_S=m_S,phi=phi,psi=psi,r=r)
 
 LV_soln <- ode(CI, seq(1,30), LV_SPNR, para)
