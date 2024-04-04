@@ -5,17 +5,15 @@ author: "Les lichens gameurs"
 #bibliography: nom.bib
 ---
 
-## Partie 1
-
-### Question biologique
+## Question biologique
 Quelles sont les conséquences d'incorporer la prédation intraguilde (PIG) dans différents modèles de compétition et de prédation?
 
 
-### Hypothèses
-R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'États alternatifs stables avec l'ajout de PIG dans des modèles préexistant.
+## Hypothèse
+R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'États alternatifs stables avec l'ajout de PIG dans des modèles préexistants tels que le modèle Consommateur-ressource, le modèle proie-prédateur de Lotka-Voltera et le modèle de compétition d'exploitation de Schoener.
 
 
-### Informations pertinentes
+## Informations pertinentes
 La PIG est définit par un système ou un prédateur IG se nourrit de la proie IG ainsi que que de la même ressource que la proie IG, créant des intéractions de compétitions entre le prédateur IG et la proie IG. 
 
 Le modèle basé sur Lotka-Voltera peut être visualisé par le schéma suivant :
@@ -24,7 +22,7 @@ Le modèle basé sur Schoener peut être visualisé par le schéma suivant :
 ![Schéma du modèle basé sur Schoener.](Schema_S8.png)
 
 
-### Méthodes
+## Méthodes
 Les figures dans l'article n'ont été produites qu'avec les modèles basés sur Lotka-Voltera et Schoener auquel des termes associés au PIG ont été ajoutés. Nous avons donc décidé de seulement modéliser ceux-ci.
 
 Le modèle Lotka-Voltera avec PIG est définit par le système suivant :
@@ -77,7 +75,7 @@ L'équation de $\frac{dP}{dt}$ a trois termes multipliés par $P$. Le premier re
 L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, sauf en ce qui a trait au deuxième terme. En effet, celui-ci représente le mortalité due au prédateurs IG en fonction de la densité de prédateurs IG.
 
 
-### Suppositions
+## Suppositions
 1. Le prédateur IG est dépendant de deux sources d'alimentation : la proie IG et la ressource commune. La proie IG est seulement dépendante de la ressource commune.
 
 1. Dans le modèle basé sur Lotka-Voltera, la ressource commune croit en suivant une courbe logistique. Dans le modèle basé sur Schoener, la ressource commune croit à taux constant.
@@ -91,18 +89,29 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 1. Dans le modèle basé sur Lotka-Voltera, les réponses fonctionnelles sont des intéractions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. Ces variables ne sont pas linéaires dans le modèle basé sur Schoener.
 
 
-### Calcul
+## Calcul
 ```{r}
 
 
 ```
 
-### Résultats
-Pour le premier modèle (basé sur Lotka-Voltera), nous avons obtenu les figures d'équilibres suivantes : 
+## Résultats
+Pour le premier modèle (basé sur Lotka-Voltera), nous avons obtenu la figure d'équilibres suivante : 
+
+![Schéma du modèle basé sur Schoener.](Schema_S8.png)
+
+Pour obtenir cette figure, nous avons utilisé les paramètres : 
 
 
-Pour le deuxième modèle (basé sur Schoener), nous avons obtenu les figures d'équilibres suivantes : 
+Pour le deuxième modèle (basé sur Schoener), nous avons obtenu la figure d'équilibres suivante : 
+
+![Schéma du modèle basé sur Schoener.](Schema_S8.png)
+
+Pour obtenir cette figure, nous avons utilisé les paramètres : 
 
 
-### Interprétations biologiques
+## Interprétations biologiques
 
+Notre hypothèse était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Nous avons testés le modèle proie-prédateur de Lotka-Voltera ainsi que le modèle de compétition d'exploitation de Schoener. D'abord, le modèle proie-prédateur avec IG nous a permis d'observer ...
+Ensuite, le modèle de compétition d'exploitation avec IG illustrait ...
+Nos résultats concordent avec ceux obtenus par R.D. Holt et G.A. Polis (1996).
