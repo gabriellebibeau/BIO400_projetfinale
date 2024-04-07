@@ -209,7 +209,7 @@ ggplot() +
 #Résultat
 figure_1 <- matrix(0.5, 11, 11)
 
-lim <- 0.05
+lim <- 0.01
 steps <- 100
 
 for(i in 0:10){
@@ -235,25 +235,25 @@ for(i in 0:10){
     
     SuperPred_sol <- ode(y=CI_SuperPred, times= seq(1,100), func= SuperPred, parms= parametre_SuperPred)
     
-    if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] > lim & LV5_sol[steps,'N'] > lim){ #1 (red)
+    if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] > lim & SuperPred_sol[steps,'N'] > lim){ #1 (red)
       figure_1[i+1,j+1] <- 0.5
       
-    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] > lim & LV5_sol[steps,'N'] > lim){ #2 (yellow)
+    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] > lim & SuperPred_sol[steps,'N'] > lim){ #2 (yellow)
       figure_1[i+1,j+1] <- 1.5
       
-    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ ##3 (blue)
+    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] < lim & SuperPred_sol[steps,'N'] > lim){ ##3 (blue)
       figure_1[i+1,j+1] <- 2.5
       
-    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #4 (green)
+    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] > lim & SuperPred_sol[steps,'N'] < lim){ #4 (green)
       figure_1[i+1,j+1] <- 3.5
       
-    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #5 (pink)
+    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] < lim & SuperPred_sol[steps,'N'] > lim){ #5 (pink)
       figure_1[i+1,j+1] <- 4.5
       
-    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] < lim & LV5_sol[steps,'N'] < lim){ #6 (orange)
+    }else if(SuperPred_sol[steps,'S'] > 0 & SuperPred_sol[steps,'P'] < lim & SuperPred_sol[steps,'N'] < lim){ #6 (orange)
       figure_1[i+1,j+1] <- 5.5
       
-    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #7 (cyan)
+    }else if(SuperPred_sol[steps,'S'] < 0 & SuperPred_sol[steps,'P'] > lim & SuperPred_sol[steps,'N'] < lim){ #7 (cyan)
       figure_1[i+1,j+1] <- 6.5
       
     }
