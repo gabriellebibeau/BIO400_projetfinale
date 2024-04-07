@@ -17,12 +17,14 @@ La PIG est définit par un système ou un prédateur IG se nourrit de la proie I
 
 Le modèle basé sur Lotka-Voltera peut être visualisé par le schéma suivant :
 ![Schéma du modèle basé sur Lotka-Voltera.](Schema_LV5.png)
+
 Le modèle basé sur Schoener peut être visualisé par le schéma suivant :
 ![Schéma du modèle basé sur Schoener.](Schema_S8.png)
+Ces deux schémas comportent les mêmes relations qu'il faudra établir dans nos modèles : La conversion de ressources en nouveaux individus, autant pour le prédateur que pour la proie; le renouvellement de la ressource; la conversion de proie en nouveau prédateur; la mortalité des proies et des prédateurs.
 
 ***
 ## Méthodes
-Les figures dans l'article n'ont été produites qu'avec les modèles basés sur Lotka-Voltera et Schoener auquel des termes associés au PIG ont été ajoutés. Nous avons donc décidé de seulement modéliser ceux-ci.
+Les figures dans l'article n'ont été produites qu'avec les modèles basés sur Lotka-Voltera et Schoener auquels des termes associés au PIG ont été ajoutés. Nous avons donc décidé de seulement modéliser ceux-ci.
 
 Le modèle Lotka-Voltera avec PIG est définit par le système suivant :
 $$
@@ -89,10 +91,9 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 
 ***
 ## Calcul
-Nous avons fait les calculs suivant avec le modèle basé sur Lotka-Voltera :
+Les calculs avec le modèle basé sur Lotka-Voltera ont été fait comme suit :
 ```{r, eval=FALSE}
 library(deSolve)
-library(ggplot2)
 library(phaseR)
 
 #Fonction
@@ -117,9 +118,10 @@ N0 <- 0.3333 #proie IG
 R0 <- 1 - P0 - N0 #Ressource
 CI_LV5 <- c(P=P0, N=N0, R=R0)
 
+
 #Boucle d'équilibre
 figure_1 <- matrix(0.5, 11, 11) #création de la matrice pour faire une image
-lim <- 0.01
+lim <- 0.01 #Comme R ne reconnait pas 0, nous avons choisi la valeur 0.01
 steps <- 100 #temps auquel l'équilibre aura surement été atteint
 
 for(i in 0:10){
@@ -141,7 +143,7 @@ for(i in 0:10){
     
     #Classement des équilibres
     if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
-      figure_1[i+1,j+1] <- 0.5
+      figure_1[i+1,j+1] <- 0.5 #pour être entre 0 et 1 et faire partie de la 1re catégorie de la fonction image
       
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
       figure_1[i+1,j+1] <- 1.5
@@ -157,14 +159,16 @@ for(i in 0:10){
   } #Fin boucle j
 } #Fin boucle i
 
+
+#Visualisation
 image (figure_1, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
-legend(x = 'bottomleft', legend = c('Prédateur IG exclus', 'Proie IG exclus','Coexistance stable', 'Instable'), fill = 1:4)
+legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
 
 
-Nous avons fait les calculs suivant avec le modèle basé sur Schoener :
-```{r}
+Les calculs avec le modèle basé sur Schoener sont les suivants :
+```{r, eval=FALSE}
 library(deSolve)
 library(ggplot2)
 library(phaseR)
@@ -173,11 +177,12 @@ library(phaseR)
 ```
 
 ## Résultats
-Pour le premier modèle (basé sur Lotka-Voltera), nous avons obtenu la figure d'équilibres suivante : 
+Pour le premier modèle (basé sur Lotka-Voltera),la figure d'équilibres obtenue est la suivante : 
 
-![Figure 1. Différents états d'équilibre possible lorsqu'il y a de la prédatio intraguilde dans le modèle proie-prédateur de Lotka-Voltera](Fig1.png)
+![Figure 1. Différents états d'équilibres possibles lorsqu'il y a de la prédation intraguilde dans le modèle proie-prédateur de Lotka-Voltera](Fig1.png)
 
-Pour obtenir cette figure, nous avons fait varié les paramètres $a'$ et $b'$ entre 0 et 1 ainsi que garder constant les paramètres suivants : 
+Dans cette figure, les paramètres $a'$ et $b'$ ont été variés entre 0 et 1, alors que les suivants ont été gardés constants : 
+
 $a = 1$
 
 $\alpha = 0.5$
@@ -194,15 +199,17 @@ $m' = 0.5$
 
 $r = 1$
 
-Pour le deuxième modèle (basé sur Schoener), nous avons obtenu la figure d'équilibres suivante : 
+
+Pour le deuxième modèle (basé sur Schoener), la figure d'équilibres suivante a été obtenue : 
 
 ![Schéma du modèle basé sur Schoener.](Schema_S8.png)
 
-Pour obtenir cette figure, nous avons utilisé les paramètres : 
+Ce sont les paramètres suivants qui ont été utilisé pour obtenir cette figure
 
 
 ## Interprétations biologiques
+L'hypothèse de départ était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Le modèle proie-prédateur de Lotka-Voltera ainsi que le modèle de compétition d'exploitation de Schoener ont été testés. D'abord, le modèle proie-prédateur avec IG permet d'observer qu'il existe 3 états d'équilibres stables : une absence totale de proie IG, une absence totale de prédateur IG et une coexistance. Lorsque la réponse fonctionnelle du prédateur IG vers la ressource commune et le taux de conversion de la ressource sont bas (Somme en bas de 1.4), le prédateur IG est toujours exclu. On pourrait en comprendre que le prédateur IG n'arrive pas assez à subvenir à ces besoins avec si peu de gains dans ces conditions. Lorsque les deux taux étaient très élevés (Somme au dessus de 1.8), c'est plutôt la proie IG qui était toujours exclue. On peut en déduire que le prédateur IG est trop compétitifs pour la ressource commune en ces conditions pour permettre à la proie IG de survivre. Finalement, une coexistance stable semble se produire lorsque la somme des deux mêmes taux se trouvent entre 1.5 et 1.7. On peut alors interpréter qu'il y a un équilibre fragile dans la compétition pour la ressource commune entre la proie IG et le prédateur IG et que c'est seulement en ces conditions qu'ils coexistent sans modifier leur taille de population. 
 
-Notre hypothèse était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Nous avons testés le modèle proie-prédateur de Lotka-Voltera ainsi que le modèle de compétition d'exploitation de Schoener. D'abord, le modèle proie-prédateur avec IG nous a permis d'observer ...
 Ensuite, le modèle de compétition d'exploitation avec IG illustrait ...
-Nos résultats concordent avec ceux obtenus par R.D. Holt et G.A. Polis (1996).
+
+
