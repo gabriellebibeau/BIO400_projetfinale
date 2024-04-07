@@ -68,24 +68,24 @@ for(i in 0:10){
 
     LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
     
-    if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #IGPredator excluded (yellow)
+    if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #IGPredator excluded (cyan)
       figure_1[i+1,j+1] <- 0.5
       
-    }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #IGPrey excluded (blue)
+    }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #IGPrey excluded (rose)
       figure_1[i+1,j+1] <- 1.5
       
-    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Stable coexistence (green)
+    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Stable coexistence (vert)
       figure_1[i+1,j+1] <- 2.5
       
-    }else{                                                         #Unstable (pink)
+    }else{                                                         #Unstable (brun)
       figure_1[i+1,j+1] <- 3.5
       
     }
   }
 }
 
-image (figure_1, col = c("yellow", "blue", "green", "pink"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
-legend(x = 'bottom', legend = 1:10, fill = 1:10)
+image (figure_1, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+legend(x = 'bottomleft', legend = c('Prédateur IG exclus', 'Proie IG exclus','Coexistance stable', 'Instable'), fill = 1:4)
 
 ggplot() +
   geom_line(aes(LV5_sol[,'time'], LV5_sol[,'P']), color = 'red') +

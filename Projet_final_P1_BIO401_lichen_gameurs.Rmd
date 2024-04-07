@@ -7,11 +7,11 @@ author: "Les lichens gameurs"
 ## Question biologique
 Quelles sont les conséquences d'incorporer la prédation intraguilde (PIG) dans différents modèles de compétition et de prédation?
 
-
+***
 ## Hypothèse
 R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'États alternatifs stables avec l'ajout de PIG dans des modèles préexistants tels que le modèle Consommateur-ressource, le modèle proie-prédateur de Lotka-Voltera et le modèle de compétition d'exploitation de Schoener.
 
-
+***
 ## Informations pertinentes
 La PIG est définit par un système ou un prédateur IG se nourrit de la proie IG ainsi que que de la même ressource que la proie IG, créant des intéractions de compétitions entre le prédateur IG et la proie IG. 
 
@@ -20,7 +20,7 @@ Le modèle basé sur Lotka-Voltera peut être visualisé par le schéma suivant 
 Le modèle basé sur Schoener peut être visualisé par le schéma suivant :
 ![Schéma du modèle basé sur Schoener.](Schema_S8.png)
 
-
+***
 ## Méthodes
 Les figures dans l'article n'ont été produites qu'avec les modèles basés sur Lotka-Voltera et Schoener auquel des termes associés au PIG ont été ajoutés. Nous avons donc décidé de seulement modéliser ceux-ci.
 
@@ -73,7 +73,7 @@ L'équation de $\frac{dP}{dt}$ a trois termes multipliés par $P$. Le premier re
 
 L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, sauf en ce qui a trait au deuxième terme. En effet, celui-ci représente le mortalité due au prédateurs IG en fonction de la densité de prédateurs IG.
 
-
+***
 ## Suppositions
 1. Le prédateur IG est dépendant de deux sources d'alimentation : la proie IG et la ressource commune. La proie IG est seulement dépendante de la ressource commune.
 
@@ -87,9 +87,87 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 
 1. Dans le modèle basé sur Lotka-Voltera, les réponses fonctionnelles sont des intéractions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. Ces variables ne sont pas linéaires dans le modèle basé sur Schoener.
 
-
+***
 ## Calcul
+Nous avons fait les calculs suivant avec le modèle basé sur Lotka-Voltera :
+```{r, eval=FALSE}
+library(deSolve)
+library(ggplot2)
+library(phaseR)
+
+#Fonction
+LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,beta,K,m,m_prime,r)){
+  
+  with(as.list(ConI, parms5), {
+    # Lotka-voltera
+    dP <- P*(b_prime*a_prime*R + beta*alpha*N - m_prime) # dP/dt
+    dN <- N*(a*b*R - m - alpha*P) #dN/dt
+    dR <- R*(r*(1- (R/K)) - a*N - a_prime*P) #dR/dt
+    
+    # Résultat
+    res <- c(dP = dP, dN = dN, dR = dR)
+    return(list(res))
+  })
+}
+
+
+#Conditions initiales
+P0 <- 0.3333 #prédateur IG
+N0 <- 0.3333 #proie IG
+R0 <- 1 - P0 - N0 #Ressource
+CI_LV5 <- c(P=P0, N=N0, R=R0)
+
+#Boucle d'équilibre
+figure_1 <- matrix(0.5, 11, 11) #création de la matrice pour faire une image
+lim <- 0.01
+steps <- 100 #temps auquel l'équilibre aura surement été atteint
+
+for(i in 0:10){
+  for(j in 0:10){
+    
+    parametre_LV5 <- c(a <- 1, #paramètres (a' et b' variables entre 0 et 1)
+               a_prime <- i/10,
+               alpha     <- 0.5,
+               b         <- 1,
+               b_prime <- j/10,
+               beta      <- 1,
+               K         <- 1,
+               m         <- 0.5,
+               m_prime   <- 0.5,
+               r         <- 1)
+
+    #Solution du système d'équation
+    LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
+    
+    #Classement des équilibres
+    if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
+      figure_1[i+1,j+1] <- 0.5
+      
+    }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
+      figure_1[i+1,j+1] <- 1.5
+      
+    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistance stable
+      figure_1[i+1,j+1] <- 2.5
+      
+    }else{  #Instable
+      figure_1[i+1,j+1] <- 3.5
+      
+    }
+
+  } #Fin boucle j
+} #Fin boucle i
+
+image (figure_1, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+legend(x = 'bottomleft', legend = c('Prédateur IG exclus', 'Proie IG exclus','Coexistance stable', 'Instable'), fill = 1:4)
+
+```
+
+
+Nous avons fait les calculs suivant avec le modèle basé sur Schoener :
 ```{r}
+library(deSolve)
+library(ggplot2)
+library(phaseR)
 
 
 ```
@@ -97,10 +175,24 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 ## Résultats
 Pour le premier modèle (basé sur Lotka-Voltera), nous avons obtenu la figure d'équilibres suivante : 
 
-![Schéma du modèle basé sur Schoener.](Schema_S8.png)
+![Figure 1. Différents états d'équilibre possible lorsqu'il y a de la prédatio intraguilde dans le modèle proie-prédateur de Lotka-Voltera](Fig1.png)
 
-Pour obtenir cette figure, nous avons utilisé les paramètres : 
+Pour obtenir cette figure, nous avons fait varié les paramètres $a'$ et $b'$ entre 0 et 1 ainsi que garder constant les paramètres suivants : 
+$a = 1$
 
+$\alpha = 0.5$
+
+$b = 1$
+
+$\beta = 1$
+
+$K = 1$
+
+$m = 0.5$
+
+$m' = 0.5$
+
+$r = 1$
 
 Pour le deuxième modèle (basé sur Schoener), nous avons obtenu la figure d'équilibres suivante : 
 
