@@ -152,11 +152,11 @@ ggplot() +
 
 ############ Partie 2
 
-SuperPred <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,
+SuperPred <- function(t, ConI, parms = c(a,a_prime,alpha,b,b_prime,
                                     beta,K,m,m_prime,r, 
                                     a_doubleprime, gamma, delta, b_doubleprime, phi, psi, m_doubleprime)){
   
-  with(as.list(ConI, parms5), {
+  with(as.list(ConI, parms), {
     # Lotka-voltera
     dS <- S*(b_doubleprime*a_doubleprime*R + phi*delta*N + psi*gamma*P - m_doubleprime) #dS/dt
     dP <- P*(b_prime*a_prime*R + beta*alpha*N - m_prime - gamma*S) # dP/dt
