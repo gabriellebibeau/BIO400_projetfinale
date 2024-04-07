@@ -69,25 +69,23 @@ for(i in 0:10){
     LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
     
     if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #IGPredator excluded (yellow)
-      figure_1[i+1,j+1] <- 1.5
+      figure_1[i+1,j+1] <- 0.5
       
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #IGPrey excluded (blue)
-      figure_1[i+1,j+1] <- 2.5
+      figure_1[i+1,j+1] <- 1.5
       
     }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Stable coexistence (green)
-      figure_1[i+1,j+1] <- 3.5
+      figure_1[i+1,j+1] <- 2.5
       
     }else{                                                         #Unstable (pink)
-      figure_1[i+1,j+1] <- 4.5
+      figure_1[i+1,j+1] <- 3.5
       
     }
-    print(paste(i, "-", j))
   }
 }
 
-image (figure_1, col = c("red", "yellow", "blue", "green", "pink", "orange"), breaks = 0:6)
-
-
+image (figure_1, col = c("yellow", "blue", "green", "pink"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+legend(x = 'bottom', legend = 1:10, fill = 1:10)
 
 ggplot() +
   geom_line(aes(LV5_sol[,'time'], LV5_sol[,'P']), color = 'red') +
