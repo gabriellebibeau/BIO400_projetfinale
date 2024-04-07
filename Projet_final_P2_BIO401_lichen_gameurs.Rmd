@@ -1,0 +1,98 @@
+---
+title: "Réseau trophiques complexes: une étude des équilibres de populations sous l'effet de la prédation intraguilde"
+subtitle: 'Une complexification du modèle présenté par R.D. Holt et G.A. Polis (1996)'
+author: "Les lichens gameurs"
+output: html_document
+bibliography: BIO401_final.bib
+---
+
+##### **Contact des auteurs**
+ Gabrielle Bibeau : bibg1101@usherbrooke.ca
+ 
+ Zacharie Scalzo : scaz2701@usherbrooke.ca
+ 
+### **Résumé**
+  100 mots max
+
+## Introduction
+
+Tout être vivant qui est hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent généralement dans le but ultime de se reproduire et donc, de passer leurs gènes à la génération suivante. Parfois, cette ressource est un autre hétérotrophe. Dansce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (source?).
+
+Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Elles ont des relations du type Consommateur-resource entre elles. Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien connu de réseau trophique est celui du milieu marin. On retrouve tout en bas de la chaine alimentaire le phytoplancton, un autotrophe. Il se fait manger par le premier niveau de consommateurs, par exemple le zooplancton herbivore. Un deuxième niveau de consommateurs, notamment des petits poissons, se nourrisent du zooplancton. Une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources (biotiques et abiotiques). Il est alors question de prédation intraguilde. En d'autres mots, il y a deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateurs.
+
+Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. R.D. Holt et G.A. Polis (1996) ont bonifié ce modèle de prédation intraguilde (1 resource consommée par une proie et une prédateur). Ils ont trouvé que cet ajoût amenait à plusieurs équilibres de populations instables. 
+
+Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de prédation intraguilde complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême) et de comparer ces équilibres avec ceux du modèle de R.D. Holt et G.A. Polis (1996) basé sur Lotka-Voltera. Nous croyons que ...Hypothèses
+
+
+![Schéma du modèle Lotka-Voltera avec PIG incluant un prédateur suprême.](Schema_LV_SPNR.png)
+  
+
+## Méthode
+
+Nous nous sommes basés sur le modèle Lotka-Voltera avec PIG créé par R.D. Holt et G.A. Polis (1996) pour bâtir notre modèle plus complexe avec trois consommateurs.
+
+Ce modèle de référence est définit par le système suivant :
+$$
+\frac{dP}{dt} = P(b'a'R + \beta\alpha N - m');
+$$ 
+$$
+\frac{dN}{dt} = N(abR - \alpha P - m);
+$$ 
+$$
+\frac{dR}{dt} = R(r(1 - \frac{R}{K}) - aN - a'P).
+$$ 
+
+Les variables dans ces équations sont définies comme suit :
+$P$ : la densité du prédateur;
+$N$ : la densité de la la proie;
+$R$ : la densité de la ressource commune;
+$a$ : la réponse fonctionnelle de la proie vers la ressource commune;
+$a'$ : la réponse fonctionnelle du prédateur vers la ressource commune;
+$\alpha$ : le taux de mortalité de la proie causée par le prédateur;
+$b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie;
+$b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur;
+$\beta$ : le taux de conversion de la consommation de la proie vers la reproduction du prédateur;
+$K$ : la quantité de ressource commune lorsqu'elle est stable;
+$m$ : le taux de mortalité densité-dépendant de la proie;
+$m'$ : le taux de mortalité densité-dépendant du prédateur;
+$r$ : le taux de croissance de la ressource commune.
+
+Ce modèle comporte plusieurs suppositions : bla
+
+
+Notre modèle ajoute plusieurs variables au modèle de R.D. Holt et G.A. Polis (1996) pour le complexifier :
+$a''$ : la réponse fonctionnelle du prédateur suprême vers la ressource commune;
+$b''$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur suprême;
+$m''$ : le taux de mortalité densité-dépendant du prédateur suprême;
+$\psi$ : le taux de conversion de la consommation du prédateur vers la reproduction du prédateur suprême;
+$\phi$ : le taux de conversion de la consommation de la proie vers la reproduction du prédateur suprême;
+$\gamma$ : la réponse fonctionnelle du prédateur suprême vers le prédateur;
+$\delta$ : la réponse fonctionnelle du prédateur suprême vers la proie.
+
+Il est décrit par le système d'équations suivant :
+$$
+\frac{dS}{dt} = S(b''a''R + \phi\delta N - \psi\gamma P - m'');
+$$ 
+$$
+\frac{dP}{dt} = P(b'a'R + \beta\alpha N - \gamma S - m');
+$$ 
+$$
+\frac{dN}{dt} = N(abR - \alpha P - \delta S - m);
+$$ 
+$$
+\frac{dR}{dt} = R(r(1 - \frac{R}{K}) - aN - a'P - a''S).
+$$ 
+
+
+
+ses suppositions supplémentaires : bla
+
+## Résultats 
+
+Les figures des équilibres
+
+## Discussion
+
+
+## Références
