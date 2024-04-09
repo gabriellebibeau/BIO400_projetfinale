@@ -16,13 +16,13 @@ bibliography: BIO401_final.bib
 
 ## Introduction
 
-Tout être vivant qui est hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent généralement dans le but ultime de se reproduire et donc, de passer leurs gènes à la génération suivante. Parfois, cette ressource est un autre hétérotrophe. Dansce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (source?).
+Tout être vivant qui est hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent généralement dans le but ultime de se reproduire et donc, de passer leurs gènes à la génération suivante. Parfois, cette ressource est un autre hétérotrophe. Dans ce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (source?).
 
 Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Elles ont des relations du type Consommateur-resource entre elles. Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien connu de réseau trophique est celui du milieu marin. On retrouve tout en bas de la chaine alimentaire le phytoplancton, un autotrophe. Il se fait manger par le premier niveau de consommateurs, par exemple le zooplancton herbivore. Un deuxième niveau de consommateurs, notamment des petits poissons, se nourrisent du zooplancton. Une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources (biotiques et abiotiques). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateurs.
 
-Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. R.D. Holt et G.A. Polis (1996) ont bonifié ce modèle de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à plusieurs équilibres de populations instables. 
+Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifiés ce modèle de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à plusieurs équilibres de populations instables. 
 
-Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême) et de comparer ces équilibres avec ceux du modèle de R.D. Holt et G.A. Polis (1996) basé sur Lotka-Voltera. Nous croyons que ...Hypothèses
+Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême) et de comparer ces équilibres avec ceux du modèle de @holt_theoretical_1997 basé sur Lotka-Voltera. Nous croyons que l'ajoût d'un prédateur suprême dans l'écosystème permettra des états alternatifs d'équilibres autant stables que instables. Il y aura certainement six cas d'exclusions : absence de proies, absence de proies et de prédateurs, absence de prédateurs, absence de prédateurs et de prédateurs suprêmes, absence de prédateurs suprêmes ainsi que l'absence de prédateurs suprêmes et de proies. Nous sommes aussi confiants que nous serons capables de trouver un équilibre stable de coexistance entre les quatres partis. Par rapport au résultats de @holt_theoretical_1997, il est fort probable que nous observons une augmentation des taux de réponse fonctionnelle vers la ressource commune et de conversion de la ressource commune en nouveaux individus pour compétitionner avec le prédateur suprême ajouter à l'équation dans un cas de coexistance stable.
 
 
 ![Figure 1. Schéma du modèle Lotka-Voltera avec PIG incluant un prédateur suprême.](Schema_LV_SPNR.png)
@@ -30,7 +30,7 @@ Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans 
 
 ## Méthode
 
-Nous nous sommes basés sur le modèle Lotka-Voltera avec PIG créé par R.D. Holt et G.A. Polis (1996) pour bâtir notre modèle plus complexe avec trois consommateurs.
+Nous nous sommes basés sur le modèle Lotka-Voltera avec PIG créé par @holt_theoretical_1997 pour bâtir notre modèle plus complexe avec trois consommateurs.
 
 Ce modèle de référence est définit par le système suivant :
 $$
@@ -106,15 +106,14 @@ Ce modèle amène alors des suppositions supplémentaires à celles nommées pr�
 1. Le prédateur est meilleur que le prédateur suprême dans l'exploitation de la ressource commune.
 
 
-Les valeurs des paramètres utilisés dans la création de la figure sont inspirés de G. A. Polis (1991) et R.D. Holt et G.A. Polis (1996).
+Les valeurs des paramètres utilisés dans la création de la figure sont inspirés de G. A. Polis (1991) et @holt_theoretical_1997.
 
 https://www-jstor-org.ezproxy.usherbrooke.ca/stable/pdf/2462536.pdf?refreqid=fastly-default%3A9480c9be0a6e17f24489f73ed3d34306&ab_segments=&origin=&initiator=&acceptTC=1
 
-Les calculs permettant d'illustrer les équilibres dans la communauté sont les suivants : 
+Voici la procédure pour initialiser le modèle Lotka-Volterra avec prédation intraguilde complexe :
 
 ```{r, eval=FALSE}
 library(deSolve)
-
 
 #Fonction
 SuperPred <- function(t, ConI, parms = c(a,a_prime,alpha,b,b_prime,
@@ -133,8 +132,14 @@ SuperPred <- function(t, ConI, parms = c(a,a_prime,alpha,b,b_prime,
     return(list(res))
   })
 }
+```
 
 
+
+Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde complexe (Figure 1). Les variables $b''$ et $a''$ prennent le rôle de variables dépendante et indépendante respectivement. Elle varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes: $a = 1$, $a' = 0.8$, $\alpha = 1$, $b = 1$, $b' = 0.7$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$, $m'' = 0.2$, $r = 1$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et finalement $\psi = 0.8$.
+
+
+```{r, eval=FALSE}
 #Conditions initiales
 S0 <- 0.2
 P0 <- 0.2
@@ -205,40 +210,11 @@ image (figure_1, col = c("red", "yellow", "blue", "green", "pink", "orange", "cy
 
 ## Résultats 
 
+Pour le premier modèle (basé sur Lotka-Voltera),les figure d'équilibres obtenue selon le choix des paramètres sont les suivantes : 
 La figure résultant des calculs est la suivante :
 ![Figure 2. Les différents équilibres dans une communauté avec trois espèces sous l'effet de PIG modélisé avec Lotka-Voltera.](FigS.png)
 
-Dans cette figure, les paramètres $a''$ et $b''$ ont été variés entre 0 et 1, alors que les suivants ont été gardés constants : 
 
-$a = 1$
-
-$a' = 0.8$
-
-$\alpha = 1$
-
-$b = 1$
-
-$b' = 0.7$
-
-$\beta = 1$
-
-$K = 1$
-
-$m = 0.5$
-
-$m' = 0.5$
-
-$m'' = 0.2$
-
-$r = 1$
-
-$\gamma = 0.4$
-
-$\delta = 0.4$
-
-$\phi = 0.8$
-
-$\psi = 0.8$
 
 
 ## Discussion
