@@ -26,8 +26,8 @@ N0 <- 0.3333
 R0 <- 1 - P0 - N0
 CI_LV5 <- c(P=P0, N=N0, R=R0)
 
-#Paramètres
-parametre_LV5 <- c(a         <- 1,
+#Paramètres fig 1/8
+parametre_LV5 <- c(a <- 1,
            a_prime   <- 0,
            alpha     <- 0.5,
            b         <- 1,
