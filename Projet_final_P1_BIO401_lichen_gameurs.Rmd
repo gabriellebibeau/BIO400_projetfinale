@@ -42,7 +42,7 @@ $N$ : la densité de la la proie IG;
 $R$ : la densité de la ressource commune;
 $a$ : la réponse fonctionnelle de la proie IG vers la ressource commune;
 $a'$ : la réponse fonctionnelle du prédateur IG vers la ressource commune;
-$\alpha$ : le taux de mortalité de la proie IG causée par le prédateur IG;
+$\alpha$ : la réponse fonctionnelle du prédateur IG vers la proie IG (et donc le taux de mortalité de la proie IG causée par le prédateur IG);
 $b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie IG;
 $b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur IG;
 $\beta$ : le taux de conversion de la consommation de la proie IG vers la reproduction du prédateur IG;
@@ -90,13 +90,10 @@ L'équation de $\frac{dN}{dt}$ signifie la même chose, mais pour la proie IG, s
 6. Dans le modèle basé sur Lotka-Voltera, les réponses fonctionnelles sont des intéractions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. Ces variables ne sont pas linéaires dans le modèle basé sur Schoener.
 
 ***
-## Calcul
+## Calculs
 
 Voici la procédure pour initialiser le modèle Lotka-Volterra avec prédation intraguilde:
 ```{r, eval=FALSE}
-library(deSolve)
-library(phaseR)
-
 #Fonction
 LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,beta,K,m,m_prime,r)){
   
@@ -114,8 +111,10 @@ LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,beta,K,m,m_prime,r
 ```
 
 
-Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde (Figure 1A). Les variables $b'$ et $a'$ prennent le rôle de variables dépendante et indépendante respectivement. Elle varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes. $\alpha$ = 0.5, $b$ = 1, $\beta = 1$, $K$ = 1, $m$ = 0.5, $m'$ = 0.5 et finalement, $r$ = 1.
+Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde (Figure 1A). Les variables $b'$ et $a'$ prennent le rôle de variables dépendante et indépendante respectivement. Elle varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes. $\alpha$ = 0.5, $b$ = 1, $\beta$ = 1, $K$ = 1, $m$ = 0.5, $m'$ = 0.5 et finalement, $r$ = 1.
 ```{r, eval=FALSE}
+library(deSolve)
+
 #Conditions initiales
 P0 <- 0.3333 #prédateur IG
 N0 <- 0.3333 #proie IG
@@ -166,7 +165,7 @@ for(i in 0:100){
 
 
 #Visualisation
-image (figure_1, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+image (figure_1A, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
 legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
@@ -174,6 +173,8 @@ legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance st
 Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde  (Figure 1B). On reprend ce qui a été fait pour la figure 1A, mais on change certain paramètres. Les variables $b'$ et $a'$ reprennent le rôle de variables dépendante et indépendante respectivement. Les autres variables sont fixées aux même valeurs que précédemment, à l'exception de  $\alpha$, qui passe de 0.5 à 1, et $m$, qui passe de 0.5 à 0.1. Ceci représente un cas où la mortalité densité-spécifique de la proie diminue, et que la réponse fonctionnelle du prédateur à la proie augmente.
 
 ```{r, eval=FALSE}
+library(deSolve)
+
 #Boucle d'équilibre
 figure_1B <- matrix(0.5, 101, 101) #création de la matrice pour faire une image
 lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
@@ -217,25 +218,19 @@ for(i in 0:100){
 
 
 #Visualisation
-image (figure_1, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+image (figure_1B, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
 legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
 
-Les calculs avec le modèle basé sur Schoener sont les suivants :
-```{r, eval=FALSE}
-library(deSolve)
-library(ggplot2)
-library(phaseR)
-
-
-```
+***
+Les calculs avec le modèle basé sur Schoener n'ont pas été frutueux. Nous avons donc décidé de ne pas les afficher et de s'en tenir qu'à un seul modèle pour la suite. 
+***
 
 ## Résultats
-Pour le premier modèle (basé sur Lotka-Voltera),les figure d'équilibres obtenue selon le choix des paramètres sont les suivantes : 
+Pour le premier modèle (basé sur Lotka-Voltera), les figures d'équilibres obtenue selon le choix des paramètres sont les suivantes : 
 
-![Figure 1 A. Différents états d'équilibres possibles du modèle proie-prédateur de Lotka-Voltera avec prédation intraguilde. Les paramètres  ](Fig1A.png)
-
+![Figure 1A. Différents états d'équilibres possibles du modèle proie-prédateur de Lotka-Voltera avec prédation intraguilde. Les paramètres utilisés sont alpha = 1, b = 1, beta = 1, K = 1, m = 0.1, m' = 0.5 et finalement, r = 1.](Fig1A.png)
 
 Dans la figure 1A, les variables $a'$ et $b'$ prennent le rôle de variables dépendante et indépendante respectivement et varient de 0 et 1, alors que les autres variables sont fixés aux valeurs suivantes : 
 
@@ -255,25 +250,22 @@ $m' = 0.5$
 
 $r = 1$
 
-![Figure 1 B. Différents états d'équilibres possibles lorsqu'il y a de la prédation intraguilde dans le modèle proie-prédateur de Lotka-Volterra avec les conditions ](Fig1B.png)
+![Figure 1B. Différents états d'équilibres possibles lorsqu'il y a de la prédation intraguilde dans le modèle proie-prédateur de Lotka-Volterra avec les conditions alpha = 0.5, b = 1, beta = 1, K = 1, m = 0.5, m' = 0.5 et finalement, r = 1.](Fig1B.png)
 
+Dans la figure 1B, les variables $a'$ et $b'$ reprennent le rôle de variables dépendante et indépendante respectivement, alors que les autres variables sont fixés aux mêmes valeurs qu'à la figure 1A, à deux exceptions  : 
 
-Dans la figure 1A, les variables $a'$ et $b'$ reprennent le rôle de variables dépendante et indépendante respectivement, alors que les autres variables sont fixés aux mêmes valeurs qu'à la figure 1A, à deux exceptions  : 
+$\alpha$ = 1. Ceci représente un cas où la réponse fonctionnelle du prédateur à la proie a augmenté.
 
-$\alpha$ = 1. Ceci représente un cas où la mortalité densité-spécifique de la proie a diminué.
+$m$ = 0.1. Ceci représente un cas où la mortalité densité-spécifique de la proie a diminué.
 
-$m$ = 0.1. Ceci représente un cas où la réponse fonctionnelle du prédateur à la proie a augmenté.
-
-Pour le deuxième modèle (basé sur Schoener), la figure d'équilibres suivante a été obtenue : 
-
-![Schéma du modèle basé sur Schoener.](Schema_S8.png)
-
-Ce sont les paramètres suivants qui ont été utilisé pour obtenir cette figure
-
-
+***
 ## Interprétations biologiques
-L'hypothèse de départ était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Le modèle proie-prédateur de Lotka-Voltera ainsi que le modèle de compétition d'exploitation de Schoener ont été testés. D'abord, le modèle proie-prédateur avec IG permet d'observer qu'il existe 3 états d'équilibres stables : une absence totale de proie IG, une absence totale de prédateur IG et une coexistance. Lorsque la réponse fonctionnelle du prédateur IG vers la ressource commune et le taux de conversion de la ressource sont bas (Somme en bas de 1.4), le prédateur IG est toujours exclu. On pourrait en comprendre que le prédateur IG n'arrive pas assez à subvenir à ces besoins avec si peu de gains dans ces conditions. Lorsque les deux taux étaient très élevés (Somme au dessus de 1.8), c'est plutôt la proie IG qui était toujours exclue. On peut en déduire que le prédateur IG est trop compétitifs pour la ressource commune en ces conditions pour permettre à la proie IG de survivre. Finalement, une coexistance stable semble se produire lorsque la somme des deux mêmes taux se trouvent entre 1.5 et 1.7. On peut alors interpréter qu'il y a un équilibre fragile dans la compétition pour la ressource commune entre la proie IG et le prédateur IG et que c'est seulement en ces conditions qu'ils coexistent sans modifier leur taille de population. 
+L'hypothèse de départ était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Le modèle proie-prédateur de Lotka-Voltera bonifié de PIG a été utilisé pour tester cette hypothèse. 
 
-Ensuite, le modèle de compétition d'exploitation avec IG illustrait ...
+D'abord, la figure 1A permet d'observer qu'il existe 3 états d'équilibres : une absence totale de proie IG, une absence totale de prédateur IG et une coexistance. Lorsque la réponse fonctionnelle du prédateur IG vers la ressource commune et le taux de conversion de la ressource sont bas (Somme en bas de 1.6), le prédateur IG est toujours exclu. On pourrait en comprendre que le prédateur IG n'arrive pas assez à subvenir à ces besoins avec si peu de gains dans ces conditions. Lorsque les deux taux étaient très élevés (Somme au dessus de 1.8), c'est plutôt la proie IG qui était toujours exclue. On peut en déduire que le prédateur IG est trop compétitifs pour la ressource commune en ces conditions pour permettre à la proie IG de survivre. Finalement, une coexistance stable semble se produire lorsque la somme des deux mêmes taux se trouvent entre 1.5 et 1.8. On peut alors interpréter qu'il y a un équilibre fragile dans la compétition pour la ressource commune entre la proie IG et le prédateur IG et que c'est seulement en ces conditions qu'ils coexistent sans modifier leur taille de population. 
 
+Ensuite, la figure 1B représente une situation légèrement différente de la figure 1A avec un taux de mortalité densité-dépendant de la proie IG diminué et une réponse fonctionnelle du prédateur IG à la proie augmentée. Il est alors possible d'observer seulement 2 états : la coexistance stable et l'exclusion de la proie IG. L'état d'exclusion du prédateur IG semble avoir disparu par rapport à la figure 1A. Cela pourrait s'expliquer par la réponse fonctionnel du prédateur IG à la proie qui a augmentée. En effet, il se pourrait qu'il est assez augmenté pour que cela soit impossible que la population de prédateur IG s'éteignent. L'exclusion de la proie IG est encore présente, mais en moins grande proportion dans la figure 1B que dans la figure 1A (somme des deux axes au dessus de 1.9 environ). Cela est logique, car la mortalité de la proie IG a été diminué; la proie IG devrait mieux survivre et sa population moins s'éteindre. La coexistance occupe la majorité des cas possible pour les valeurs de réponse fonctionnelle du prédateur IG vers la ressource commune et de taux de conversion de la ressource. Cela est probablement due à l'effet combiné d'une plus grande consommation de la proie IG par le prédateur IG, mais une meilleure survie globale de la proie IG.
 
+***
+***
+***
