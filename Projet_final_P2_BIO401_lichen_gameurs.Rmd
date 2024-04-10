@@ -20,7 +20,7 @@ Tout être vivant hétérotrophe doit se nourir pour survivre. Ces individus ont
 
 https://www-jstor-org.ezproxy.usherbrooke.ca/stable/3543597?casa_token=J69TNke0_hYAAAAA%3ACEZPYCSNrWJICJG_QbYQbaSIEeVsF_jrE1bL8HcRX5Vdh_YeTUcQfQsmEsK8bipdTLdde7M967HA-KUqvIwb7skomKoD9vO0p8gRaqFcXXnLPUQ9Fhk&seq=4
 
-Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-resource entre elles Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie (Polis 91). Ce réseau très complexe comporte  Une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources (biotiques et abiotiques). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateurs.
+Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-resource entre elles Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie (Polis 91). DRETTELADRETTELADRETTELADRETTELADRETTELADRETTELA Ce réseau très complexe comporte  Une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources (biotiques et abiotiques). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateurs.
 
 Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifiés ce modèle de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à plusieurs équilibres de populations instables. 
 
@@ -103,9 +103,8 @@ Ce modèle amène alors des suppositions supplémentaires à celles nommées pr�
  
 1. La portion du taux de croissance du prédateur suprême permis par la consommation du prédateur ainsi que la portion  permis par la consommation de la proie sont plus grandes que 0.
 
-1. Le prédateur suprême bénéficie des effets positifs de la consommation de la proie et du prédateur de façon instannée. 
+1. Le prédateur suprême bénéficie des effets positifs de la consommation de la proie et du prédateur de trois façons différentes:
 
-1. Le prédateur est meilleur que le prédateur suprême dans l'exploitation de la ressource commune.
 
 
 Les valeurs des paramètres utilisés dans la création de la figure sont inspirés de G. A. Polis (1991) et @holt_theoretical_1997.
@@ -149,7 +148,7 @@ R0 <- 1 - P0 - N0 - S0
 CI_SuperPred <- c(S=S0, P=P0, N=N0, R=R0)
 
 
-#Boucle d'équilibre
+#Boucle d'équilibre (exemple de la figure 2, aux conditions A, avec un super-prédateur de type 1 )
 figure_1 <- matrix(0.5, 11, 11)
 lim <- 0.01
 steps <- 100
@@ -157,23 +156,24 @@ steps <- 100
 for(i in 0:10){
   for(j in 0:10){
     
-    parametre_SuperPred <- c(a   <- 1,
-                             a_prime   <- 0.8,
-                             alpha     <- 1,
-                             b         <- 1,
-                             b_prime   <- 0.7,
-                             beta      <- 1,
-                             K         <- 1,
-                             m         <- 0.5,
-                             m_prime   <- 0.5,
-                             r         <- 1,
-                             a_doubleprime <- i/10,
-                             gamma     <- 0.4,
-                             delta     <- 0.4,
-                             b_doubleprime <- j/10,
-                             phi       <- 0.8,
-                             psi       <- 0.8, 
-                             m_doubleprime <- 0.2)
+   parametre_SuperPred <- c(a   <- 1,
+                         a_prime   <- 0.6,
+                         alpha     <- 0.5,
+                         b         <- 1,
+                         b_prime   <- 0.6,
+                         beta      <- 1,
+                         K         <- 1,
+                         m         <- 0.5,
+                         m_prime   <- 0.5,
+                         r         <- 1,
+                         a_doubleprime <- i/100,
+                         gamma     <- 1,
+                         delta     <- 1,
+                         b_doubleprime <- j/100,
+                         phi       <- 1,
+                         psi       <- 1, 
+                         m_doubleprime <- 0.5)
+
     
     SuperPred_sol <- ode(y=CI_SuperPred, times= seq(1,100), func= SuperPred, parms= parametre_SuperPred)
     
@@ -231,42 +231,29 @@ Un quatrième cas, exactement comme les trois derniers, est afficher ci-dessous 
 ```
 
 ## Résultats 
+Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatres types de prédateurs. 
 
-Nous avons tout d'abord compilé la figure d'équilibres suivante grâce à notre modèle de prédation intraguilde complexe : 
+![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 1.](Fig2Condi1A)
 
-![Figure 2. Les différents équilibres dans une communauté avec trois espèces sous l'effet de PIG modélisé avec Lotka-Voltera ($m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$).](FigS.png)
 
-Les valeurs des paramètres utilisés dans notre modèle pour arriver à cette figure sont décrit dans la section méthode, et cela va pour toutes les autres figures présentées.
+![Figure 2.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 2.](Fig2Condi1B)
 
-***
+![Figure 2.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 3.](Fig2Condi1C)
 
-Ensuite, nous avons créé cette figure d'équilibres, toujours grâce à notre modèle de prédation intraguilde complexe : 
+![Figure 2.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 4.](Fig2Condi1D)
 
-![Figure 3. Les différents équilibres dans une communauté avec trois espèces sous l'effet de PIG modélisé avec Lotka-Voltera ($m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$).](FigS.png)
 
-***
+Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1997, avec les quatres types de prédateurs.  
 
-Puis, nous avons illustré les équilibres de notre modèle dans la figure suivante : 
 
-![Figure 4. Les différents équilibres dans une communauté avec trois espèces sous l'effet de PIG modélisé avec Lotka-Voltera ($m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$).](FigS.png)
+![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi1A)
 
-***
 
-Finalement, nous avons observé les équilibres créé par un quatrième type de prédateur dans notre modèle à travers cette figure : 
+![Figure 2.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi1B)
 
-![Figure 5. Les différents équilibres dans une communauté avec trois espèces sous l'effet de PIG modélisé avec Lotka-Voltera ($m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$).](FigS.png)
+![Figure 2.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi1C)
 
-## Discussion
-Avant de calculer les équilibres de notre modèle, nous croyions que l'ajoût d'un prédateur suprême dans l'écosystème permettra des états alternatifs d'équilibres autant stables que instables.
+![Figure 2.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi1D)
 
-Nous pensions aussi qu'il y aurait des exclusions (6) et une coexistance stable.
-
-Finalement, nous avions estimé une augmentation des taux de réponse fonctionnelle vers la ressource commune et de conversion de la ressource commune en nouveaux individus.
-
-Interprétation résultats (Type de prédateurs) (exemple nature, comparaison possible?)
-
-En conclusion, 
-
-Notre modèle ainsi que tout ceux le précédent sont entre autre bati pour des relations entre espèces appartenant au règne animal et/ou au règne végétal. Toutefois, une partie importante de nos écosystème grouille sous la terre : la fonge. Inclure à notre modèle de PIG un mycète capable de fournir une source de nourriture supplémentaire aux proies et aux deux prédateurs ainsi qu'augmenter le renouvellement de la ressource commune (en assumant que cette dernière est une plante) serait fort intéressant.
 
 ## Références
