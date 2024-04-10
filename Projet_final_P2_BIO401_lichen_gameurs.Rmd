@@ -137,7 +137,13 @@ SuperPred <- function(t, ConI, parms = c(a,a_prime,alpha,b,b_prime,
 
 
 
-Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde complexe (Figure 2). Les variables $b''$ et $a''$ prennent le rôle de variables dépendante et indépendante respectivement. Elles varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes: $a = 1$, $a' = 0.8$, $\alpha = 1$, $b = 1$, $b' = 0.7$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$, $m'' = 0.2$, $r = 1$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et finalement $\psi = 0.8$. Les variables concernant le prédateur suprême ont été modifié à trois reprises ensuite pour tester les effets des différents types de prédations sur les équilibres.
+Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde complexe (Figures 2 et 3). Les variables $b''$ et $a''$ prennent le rôle de variables dépendante et indépendante respectivement. Elles varient de 0 à 1. 
+
+Pour les figures 2, les autres variables sont fixées aux conditions énumérées dans la première figure de Polis 91, soit: $a = 1$, $a' = 0.6$, $\alpha = 0.5$, $b = 1$, $b' = 0.6$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$ et $r = 1$. Les autres variables représente le super prédateurs opportuniste: $\gamma = 1$, $\delta = 1$ et $m'' = 0.5$. Les variables $\phi$ et $\psi$ varie en fonction du type de super-prédateur. Pour le super prédateur de type 1, $\phi$ et $\psi$ valent tout deux 1: le super prédateur convertit efficassement le prédateur et la proie en reproduction. Pour le super prédateur de type 2, $\phi$ et $\psi$ valent respectivement 0.2 et 1: le super prédateur convertit efficassement le prédateur en reproduction, mais pas la proie. Pour le super prédateur de type 3, $\phi$ et $\psi$ valent respectivement 1 et 0.2: le super prédateur convertit efficassement la proie en reproduction, mais pas le prédateur. Finalement, pour le super prédateur de type 1, $\phi$ et $\psi$ valent tout deux 0.2: le super prédateur peut aussi bien consommer la proie que le prédateur et ne convertit pas efficassement les deux en reproduction.
+
+Pour les figures 3, les conditions énumérées précédemment ne change pas, à l'exception des valeurs suivantes: dans tous les cas des figures 3.1 à 3.4, les valeurs $\alpha$ et $m$ sont fixées à 1 et 0.1, respectivement. 
+
+Voici, en exemple, le calcul pour générer la figure 2.1:
 
 ```{r, eval=FALSE}
 #Conditions initiales
@@ -203,35 +209,20 @@ for(i in 0:10){
 }
 
 
-image (figure_1, col = c("red", "yellow", "blue", "green", "pink", "orange", "cyan" ), breaks = 0:7, xlab = 'b_doubleprime' , ylab = 'a_doubleprime')
-#legend(x = 'bottomleft', legend = c('Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:3)
+image (figure_1, col = c("black", "red", "chartreuse4", "blue", "cyan", "darkmagenta", "gold" ), breaks = 0:7)
+legend('bottomleft', legend = c('Coexistence stable',
+                                'Super-prédateur IG exclu',
+                                'Prédateur IG exclu',
+                                'Proie IG exclu',
+                                'Super-prédateur et prédateur IG exclu',
+                                'Prédateur et proie IG exclu',
+                                'Super-prédateur et proie IG exclu'),cex=0.8, fill = 1:7)
 
 ```
 
-
-Voici un deuxième exemple de la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde complexe (Figure 3). Tout comme la première figure, les variables $b''$ et $a''$ prennent le rôle de variables dépendante et indépendante respectivement et varient de 0 à 1. Les autres variables sont fixées aux mêmes valeurs qu'à la figure 2} sauf en ce qui concerne les suivantes: $m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$.
-
-```{r, eval=FALSE}
-
-
-```
-
-Ce troisième cas représente les équilibres de notre modèle (Figure 4) comme les deux cas précédents, en préservant les mêmes axes et variables, sauf pour les suivantes : $m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$.
-
-```{r, eval=FALSE}
-
-
-```
-
-Un quatrième cas, exactement comme les trois derniers, est afficher ci-dessous (Figure 5). Les variables influançant le prédateur suprême ont été modifiées : $m'' = 0.2$, $\gamma = 0.4$, $\delta = 0.4$, $\phi = 0.8$ et $\psi = 0.8$.
-
-```{r, eval=FALSE}
-
-
-```
 
 ## Résultats 
-Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatres types de prédateurs. 
+Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatres types de prédateurs.
 
 ![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 1.](Fig2Condi1A)
 
@@ -246,14 +237,23 @@ Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_
 Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1997, avec les quatres types de prédateurs.  
 
 
-![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi1A)
+![Figure 3.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi1A)
 
 
-![Figure 2.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi1B)
+![Figure 3.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi1B)
 
-![Figure 2.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi1C)
+![Figure 3.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi1C)
 
-![Figure 2.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi1D)
+![Figure 3.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi1D)
+
+
+## Interprétation biologique 
+###1. Figure 2.1 à 2.4
+
+
+
+###2. Figure 3.1 à 3.4
+
 
 
 ## Références
