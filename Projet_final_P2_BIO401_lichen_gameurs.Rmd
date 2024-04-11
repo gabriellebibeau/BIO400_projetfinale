@@ -243,6 +243,7 @@ Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1
 ## Interprétation biologique 
 ###1. Figure 2.1 à 2.4
 
+Les figures sont sensiblement les mêmes. Pour les 4 types de super-prédateur, le prédateur ne peut survivre: il est automatiquement extirpé. Lorsque le super-prédateur est efficasse à consommer la ressource et y possède une haute réponse fonctionnelle. Le système ressemble en terme de taille des zones exclusion
 
 
 ###2. Figure 3.1 à 3.4
