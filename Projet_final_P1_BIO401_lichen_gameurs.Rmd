@@ -9,7 +9,7 @@ Quelles sont les conséquences d'incorporer la prédation intraguilde (PIG) dans
 
 ***
 ## Hypothèse
-R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'États alternatifs stables avec l'ajout de PIG dans des modèles préexistants tels que le modèle Consommateur-ressource, le modèle proie-prédateur de Lotka-Voltera et le modèle de compétition d'exploitation de Schoener.
+R.D. Holt et G.A. Polis avancent qu'il y a un grand potentiel d'états alternatifs stables avec l'ajout de PIG dans des modèles préexistants tels que le modèle Consommateur-ressource, le modèle proie-prédateur de Lotka-Voltera et le modèle de compétition d'exploitation de Schoener.
 
 ***
 ## Informations pertinentes
