@@ -146,7 +146,14 @@ for(i in 0:100){
     LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
     
     #Classement des équilibres
-    if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
+   
+    if(sd(LV5_sol[(0.75*steps):steps,'P']) > limsd & sd(LV5_sol[(0.75*steps):steps,'N']) > limsd){ #Instable
+      figure_1A[i+1,j+1] <- 3.5 
+      print(paste("i = ", i, "with a sd of:",(sd(LV5_sol[(0.9*steps):steps,'P'])),"j = ", j, "with a sd of:",(sd(LV5_sol[(0.9*steps):steps,'N']))))
+      #Code pour trouver les positions des endroits avec de l'instabilité, et intepréter graphiquement le résultat
+    
+    
+    }else if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
       figure_1A[i+1,j+1] <- 0.5 #pour être entre 0 et 1 et faire partie de la 1re catégorie de la fonction image
       
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
@@ -154,10 +161,6 @@ for(i in 0:100){
       
     }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistance stable
       figure_1A[i+1,j+1] <- 2.5
-      
-    }else{  #Instable
-      figure_1A[i+1,j+1] <- 3.5
-      
     }
 
   } #Fin boucle j
@@ -165,7 +168,7 @@ for(i in 0:100){
 
 
 #Visualisation
-image (figure_1A, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+image (figure_1A, col = c("cyan2", "salmon", "green", "black"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
 legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
@@ -179,7 +182,8 @@ library(deSolve)
 figure_1B <- matrix(0.5, 101, 101) #création de la matrice pour faire une image
 lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
             # La mise en place d'une limite où on assume que la densité P, N ou R est égal à 0 permet de mieux modéliser les différents étapes d'équilibre.
-steps <- 100 #temps auquel l'équilibre aura surement été atteint
+limsd <- 
+steps <- 100 #pas de temps que nous jugeons adéquat pour représenter les états du système
 
 for(i in 0:100){
   for(j in 0:100){
@@ -199,26 +203,26 @@ for(i in 0:100){
     LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
     
     #Classement des équilibres
-    if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
-      figure_1B[i+1,j+1] <- 0.5 #pour être entre 0 et 1 et faire partie de la 1re catégorie de la fonction image
+    if(sd(LV5_sol[(0.75*steps):steps,'P']) > limsd & sd(LV5_sol[(0.75*steps):steps,'N']) > limsd){ #Instable
+      figure_1A[i+1,j+1] <- 3.5 
+    
+    }else if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
+      figure_1A[i+1,j+1] <- 0.5 #pour être entre 0 et 1 et faire partie de la 1re catégorie de la fonction image
       
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
-      figure_1B[i+1,j+1] <- 1.5
+      figure_1A[i+1,j+1] <- 1.5
       
     }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistance stable
-      figure_1B[i+1,j+1] <- 2.5
-      
-    }else{  #Instable
-      figure_1B[i+1,j+1] <- 3.5
-      
+      figure_1A[i+1,j+1] <- 2.5
     }
+
 
   } #Fin boucle j
 } #Fin boucle i
 
 
 #Visualisation
-image (figure_1B, col = c("cyan2", "salmon", "green", "brown4"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
+image (figure_1B, col = c("cyan2", "salmon", "green", "black"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
 legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
