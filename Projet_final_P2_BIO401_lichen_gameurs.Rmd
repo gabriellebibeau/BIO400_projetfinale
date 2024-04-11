@@ -12,37 +12,36 @@ bibliography: BIO401_final.bib
  Zacharie Scalzo : scaz2701@usherbrooke.ca
  
 ### **Résumé**
-Les réseaux trophiques ne sont toujours pas modélisés avec précision malgré l'influence indéniable des niveaux trophiques que les différentes populations au sein d'une communauté occupent sur les variations des tailles de ces populations. Nous nous sommes inspirés du modèle proie-prédateur de Lotka-Voltera bonifié de prédation intraguilde simple par @holt_theoretical_1997 pour créer un modèle de prédation intraguilde avec une ressource commune, une proie (consomme la ressource), un prédateur (consomme la ressource et la proie) et un prédateur suprême (consomme tous les autres). Nous avons alors démontré qu'il existe plusieurs états d'équilibre dans cette communauté.
+Les réseaux trophiques ne sont toujours pas modélisés avec précision malgré l'influence indéniable des niveaux trophiques que les différentes populations au sein d'une communauté occupent sur les variations des tailles de ces populations. Nous nous sommes inspirés du modèle proie-prédateur de Lotka-Voltera bonifié de prédation intraguilde simple par @holt_theoretical_1997 pour créer un modèle de prédation intraguilde avec une ressource commune, une proie IG (consomme la ressource), un prédateur IG (consomme la ressource et la proie) et un super prédateur IG (consomme tous les autres). Nous avons alors démontré qu'il existe plusieurs états d'équilibre dans cette communauté.
 
 ## Introduction
 
-Tout être vivant hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent pour survivre et ce pour ce reproduire. Parfois, cette ressource est un autre hétérotrophe. Dans ce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (@andersson_influence_1977). 
+Tout être vivant hétérotrophe doit se nourrir pour survivre. Ces individus ont alors des relations consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent pour survivre, et ce pour se reproduire. Parfois, cette ressource est un autre hétérotrophe. Dans ce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relations ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (@andersson_influence_1977). 
 
-Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-resource entre elles. Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie. Ce réseau très complexe comporte presque 200 espèces de plantes vasculaire, environ 150 espèces de vertébrés, une cinquantaine d'espèces d'arachnides, et énormément (tellement qu'on ne peut les compter) d'espèces de microorganismes, d'insectes et de nématodes (@polis_complex_1991). Toutes ces espèces sont inter-reliée parce qu'elles se consomment entre-elles et font même, pour certaines, du cannibalisme. Contrairement à ce que les cas théoriques populaires modélisent, une espèce peut faire partie de plusieurs niveaux trophiques en consommant différentes ressources biotiques (omnivorie). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a minimalement deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateur. Bref, ces grands réseaux trophiques sont si complexes que @polis_complex_1991 juge qu'il est impossible de les étudiés en un seul morceau et les subdivise en six sous-réseaux d'un seulement un est dédié aux vertébrés.
+Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-ressource entre elles. Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie. Ce réseau très complexe comporte presque 200 espèces de plantes vasculaires, environ 150 espèces de vertébrés, une cinquantaine d'espèces d'arachnides, et énormément (tellement qu'on ne peut les compter) d'espèces de microorganismes, d'insectes et de nématodes (@polis_complex_1991). Toutes ces espèces sont interreliée parce qu'elles se consomment entre-elles et font même, pour certaines, du cannibalisme. Contrairement à ce que les cas théoriques populaires modélisent, une espèce peut faire partie de plusieurs niveaux trophiques en consommant différentes ressources biotiques (omnivorie). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a minimalement deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateur. Bref, ces grands réseaux trophiques sont si complexes que @polis_complex_1991 juge qu'il est impossible de les étudier en un seul morceau et les subdivise en six sous-réseaux dont seulement un est dédié aux vertébrés.
 
-Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifiés ce dernier de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à 4 états d'équilibres : une absence totale de proie intraguilde (IG), une absence totale de prédateur IG, un équilibre instable et une coexistance. Notre modèles précédents ne permettait pas d'atteindre d'instabilité, et ce peut importe les paramètres utilisés. Nous allons donc ne pas tenir en compte les états d'équilibre instable.  Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême). En d'autres mots, nous avons introduit un prédateur suprême opportuniste (qui veux autant manger le prédateur que la proie) au modèle de @holt_theoretical_1997 basé sur Lotka-Voltera, puis fait varier le type de prédateur pour voir si cela amenait des changement dans les états d'équilibre. Nous considérons que le prédateur est un omnivore, malgrés le nombre restreint d'espèce qu'il consommment. Il n'a pas de préférence entre le prédateur intraguilde et la proie intraguilde. Nous testerons quatre types de prédateur différents:
+Dans le passé, plusieurs modèles ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifié ce dernier de PIG (une ressource consommée par une proie IG et un prédateur IG). Ils ont trouvé que cet ajout menait à 4 états d'équilibres : une absence totale de proie intraguilde (IG), une absence totale de prédateur IG, un équilibre instable et une coexistence. Notre modèle précédent ne permettait pas d'atteindre d'instabilité, et ce peu importe les paramètres utilisés. Nous allons donc ne pas tenir en compte les états d'équilibre instable. Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie IG, prédateur IG et super prédateur IG). En d'autres mots, nous avons introduit un super prédateur IG opportuniste (qui veut autant manger le prédateur IG que la proie IG) au modèle de @holt_theoretical_1997 basé sur Lotka-Voltera, puis fait varier le type de super prédateur IG pour voir si cela amenait des changements dans les états d'équilibre. Nous considérons que le super prédateur IG est un omnivore, malgré le nombre restreint d'espèces qu'il consomme. Il n'a pas de préférence entre le prédateur IG et la proie IG. Nous testerons quatre types de super prédateurs IG différents:
 
-Super-prédateur IG de type 1: Le super prédateur est très bien adapté à la consommation du prédateur IG et de la proie IG. Il convertit donc efficassement ses derniers en reproduction pour lui même. 
+Super prédateur IG de type 1: Le super prédateur est très bien adapté à la consommation du prédateur IG et de la proie IG. Il convertit donc efficacement ses derniers en reproduction pour lui-même. 
 
-Super-prédateur IG de type 2: Super-prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation du prédateur IG, et peu adapté à la consommation de la proie IG. Il convertit donc efficassement seulement le prédateur IG en reproduction pour lui même.
+Super prédateur IG de type 2: Super-prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation du prédateur IG, et peu adapté à la consommation de la proie IG. Il convertit donc efficacement seulement le prédateur IG en reproduction pour lui-même.
 
-Super-prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation de la proie IG, et peu adapté à la consommation du prédateur IG. Il convertit donc efficassement seulement la proie IG en reproduction pour lui même.
+Super prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation de la proie IG, et peu adapté à la consommation du prédateur IG. Il convertit donc efficacement seulement la proie IG en reproduction pour lui-même.
 
+Super prédateur IG de type 4: Le super prédateur n'est pas bien adapté à la consommation ni du prédateur IG, ni de la proie IG. Il convertit donc peu efficacement ces derniers en reproduction pour lui-même. Il est donc beaucoup plus dépendant de la ressource pour se nourrir.
 
-Super-prédateur IG de type 4: Le super prédateur n'est pas bien adapté à la consommation ni du prédateur IG, ni de la proie IG. Il convertit donc peu efficassement ses derniers en reproduction pour lui même. Il est donc beaucoup plus dépendant de la ressource pour ce nourrir
+Voici un schéma qui illustre bien notre modèle : 
 
-Voici un schéma ui illustre bien notre modèle : 
+![Figure 1. Schéma du modèle Lotka-Voltera avec PIG incluant un super prédateur.](Schema_LV_SPNR.png)
 
-![Figure 1. Schéma du modèle Lotka-Voltera avec PIG incluant un prédateur suprême.](Schema_LV_SPNR.png)
-
-Nous croyons que l'ajoût d'un prédateur suprême dans l'écosystème permettra plusieures états alternatifs d'équilibres. Toutefois, l'état qui sera le plus présent est un équilibre stable de coexistance entre les quatres partis. En se basant sur l'article de @andersson_influence_1977 qui avance que l'ajoût d'omnivores généralistes a tendance à stabliser la coexistence dans une communauté, il est logique que notre modèlede PIG avec prédateur suprême permet d'observer plus de cas de coexistance que le modèle de PIG simple de @holt_theoretical_1997. 
+Nous croyons que l'ajout d'un super prédateur IG dans l'écosystème permettra plusieurs états alternatifs d'équilibres. Toutefois, l'état qui sera le plus présent est un équilibre stable de coexistence entre les quatre partis. En se basant sur l'article de @andersson_influence_1977 qui avance que l'ajout d'omnivores généralistes a tendance à stabiliser la coexistence dans une communauté, il est logique que notre modèle de PIG avec super prédateur IG permette d'observer plus de cas de coexistence que le modèle de PIG simple de @holt_theoretical_1997. 
 
 
 ## Méthode
 
 Nous nous sommes basés sur le modèle Lotka-Voltera avec PIG créé par @holt_theoretical_1997 pour bâtir notre modèle plus complexe avec trois consommateurs.
 
-Ce modèle de référence est définit par le système suivant :
+Ce modèle de référence est définie par le système suivant :
 $$
 \frac{dP}{dt} = P(b'a'R + \beta\alpha N - m');
 $$ 
@@ -54,40 +53,40 @@ $$
 $$ 
 
 Les variables dans ces équations sont définies comme suit :
-$P$ : la densité du prédateur;
-$N$ : la densité de la la proie;
+$P$ : la densité du prédateur IG;
+$N$ : la densité de la la proie IG;
 $R$ : la densité de la ressource commune;
-$a$ : la réponse fonctionnelle de la proie vers la ressource commune;
-$a'$ : la réponse fonctionnelle du prédateur vers la ressource commune;
-$\alpha$ : le taux de mortalité de la proie causée par le prédateur;
-$b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie;
-$b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur;
-$\beta$ : le taux de conversion de la consommation de la proie vers la reproduction du prédateur;
+$a$ : la réponse fonctionnelle de la proie IG vers la ressource commune;
+$a'$ : la réponse fonctionnelle du prédateur IG vers la ressource commune;
+$\alpha$ : le taux de mortalité de la proie IG causée par le prédateur IG;
+$b$ : le taux de conversion de la consommation de la ressource vers la reproduction de la proie IG;
+$b'$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur IG;
+$\beta$ : le taux de conversion de la consommation de la proie IG vers la reproduction du prédateur IG;
 $K$ : la quantité de ressource commune lorsqu'elle est stable;
-$m$ : le taux de mortalité densité-dépendant de la proie;
-$m'$ : le taux de mortalité densité-dépendant du prédateur;
+$m$ : le taux de mortalité densité-dépendant de la proie IG;
+$m'$ : le taux de mortalité densité-dépendant du prédateur IG;
 $r$ : le taux de croissance de la ressource commune.
 
-Le modèle de Holt et Polis comportait plusieurs suppositions : 
-1. Le prédateur est dépendant de deux sources d'alimentation : la proie et la ressource commune. La proie est seulement dépendante de la ressource commune. Sa préférence entre les deux est variable.
+Le modèle de @holt_theoretical_1997 comportait plusieurs suppositions : 
+1. Le prédateur IG est dépendant de deux sources d'alimentation : la proie IG et la ressource commune. Sa préférence entre les deux est variable. La proie IG est seulement dépendante de la ressource commune. 
 
 2. La ressource commune croit en suivant une courbe logistique. 
 
-3. La portion du taux de croissance du prédateur permis par la consommation de la proie est plus grande que 0. 
+3. La portion du taux de croissance du prédateur IG permise par la consommation de la proie est plus grande que 0. 
 
-4. Le prédateur bénéficie des effets positifs de la consommation de la proie de façon instannée. 
+4. Le prédateur IG bénéficie des effets positifs de la consommation de la proie IG de façon instantanée. 
 
-5. Les réponses fonctionnelles sont des intéractions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. 
+5. Les réponses fonctionnelles sont des interactions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. 
 
 
 Notre modèle ajoute plusieurs variables au modèle de @holt_theoretical_1997 pour le complexifier :
-$a''$ : la réponse fonctionnelle du prédateur suprême vers la ressource commune;
-$b''$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur suprême;
-$m''$ : le taux de mortalité densité-dépendant du prédateur suprême;
-$\psi$ : le taux de conversion de la consommation du prédateur vers la reproduction du prédateur suprême;
-$\phi$ : le taux de conversion de la consommation de la proie vers la reproduction du prédateur suprême;
-$\gamma$ : la réponse fonctionnelle du prédateur suprême vers le prédateur;
-$\delta$ : la réponse fonctionnelle du prédateur suprême vers la proie.
+$a''$ : la réponse fonctionnelle du super prédateur IG vers la ressource commune;
+$b''$ : le taux de conversion de la consommation de la ressource vers la reproduction du super prédateur IG;
+$m''$ : le taux de mortalité densité-dépendant du super prédateur IG;
+$\psi$ : le taux de conversion de la consommation du prédateur IG vers la reproduction du super prédateur IG;
+$\phi$ : le taux de conversion de la consommation de la proie IG vers la reproduction du super prédateur IG;
+$\gamma$ : la réponse fonctionnelle du super prédateur IG vers le prédateur;
+$\delta$ : la réponse fonctionnelle du super prédateur IG vers la proie IG.
 
 Notre modèle avec prédation suprême est décrit par le système d'équations suivant :
 
@@ -106,13 +105,13 @@ $$
 
 Ce modèle amène alors des suppositions supplémentaires à celles nommées précédemment :
 
-6. Le prédateur suprême est dépendant de trois sources d'alimentation : le prédateur, la proie et la ressource commune.
+6. Le super prédateur IG est dépendant de trois sources d'alimentation : le prédateur IG, la proie IG et la ressource commune.
 
-7. Le prédateur suprême n'a pas de préférence entre le prédateur et la proie. Ces derniers subissent donc proportionnellement la même mortalité liée au prédateur suprême.
+7. Le super prédateur IG n'a pas de préférence entre le prédateur IG et la proie IG. Ces derniers subissent donc proportionnellement la même mortalité liée au super prédateur IG.
  
-8. La portion du taux de croissance du prédateur suprême permis par la consommation du prédateur ainsi que la portion  permis par la consommation de la proie sont plus grandes que 0.
+8. La portion du taux de croissance du super prédateur IG permise par la consommation du prédateur IG ainsi que la portion permise par la consommation de la proie sont plus grandes que 0.
 
-9. Le prédateur suprême bénéficie des effets positifs de la consommation de la proie et du prédateur instantannément.
+9. Le super prédateur IG bénéficie des effets positifs de la consommation de la proie et du prédateur instantanément.
 
 Les valeurs des paramètres utilisés dans la création de la figure sont basé sur de @polis_complex_1991 et @holt_theoretical_1997.
 
@@ -219,38 +218,38 @@ legend('bottomleft', legend = c('Coexistence stable',
 
 ```
 
-Pour les figures 4.1 à 4.4, les variables sont fixées aux conditions énumérées dans la première figure de l'étude original (@polis_complex_1991), soit: $a = 1$, $\alpha = 0.5$, $b = 1$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$ et $r = 1$. Dans l'étude de Polis publié en 1991, les variables $a'$ et $b'$ variait de 0 à 1 pour modéliser le changement d'état d'équilibre en fonction de la réponse fonctionnelle du prédateur IG à la ressource et la conversion de ressource en reproduction du prédateur IG. Nous avons choisis de fixer $a'$ et $b'$ à des valeurs qui, selon le modèle de prédation intraguilde simple, génère une coexistence à l'équilibre entre les trois espèces, soit 1 et 0.6 respectivement (Figure 2 et 3). Les variables $b''$ et $a''$ reprennent donc le rôle de $a'$ et $b'$, soit la réponse fonctionnelle du super-prédateur IG à la ressource et la conversion de ressource en reproduction du super-prédateur IG. Elles varient de 0 à 1.
+Pour les figures 4.1 à 4.4, les variables sont fixées aux conditions énumérées dans la première figure de l'étude originale (@polis_complex_1991), soit: $a = 1$, $\alpha = 0.5$, $b = 1$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$ et $r = 1$. Dans l'étude de Polis publiée en 1991, les variables $a'$ et $b'$ variait de 0 à 1 pour modéliser le changement d'état d'équilibre en fonction de la réponse fonctionnelle du prédateur IG à la ressource et la conversion de ressource en reproduction du prédateur IG. Nous avons choisi de fixer $a'$ et $b'$ à des valeurs qui, selon le modèle de PIG simple, génère une coexistence à l'équilibre entre les trois espèces, soit 1 et 0.6 respectivement (Figure 2 et 3). Les variables $b''$ et $a''$ reprennent donc le rôle de $a'$ et $b'$, soit la réponse fonctionnelle du super prédateur IG à la ressource et la conversion de ressource en reproduction du super prédateur IG. Elles varient de 0 à 1.
 
-Les autres variables représente le super prédateurs opportuniste: $\gamma = 1$, $\delta = 1$ et $m'' = 0.5$. Les variables $\phi$ et $\psi$ varie en fonction du type de super-prédateur. Pour le super prédateur de type 1, $\phi$ et $\psi$ valent tout deux 1: le super prédateur convertit efficassement le prédateur et la proie en reproduction. Pour le super prédateur de type 2, $\phi$ et $\psi$ valent respectivement 0.2 et 1: le super prédateur convertit efficassement le prédateur en reproduction, mais pas la proie. Pour le super prédateur de type 3, $\phi$ et $\psi$ valent respectivement 1 et 0.2: le super prédateur convertit efficassement la proie en reproduction, mais pas le prédateur. Finalement, pour le super prédateur de type 1, $\phi$ et $\psi$ valent tout deux 0.2: le prédateur suprême ne convertit pas efficassement les deux autres espèces en reproduction.
+Les autres variables représentent le super prédateur IG opportuniste: $\gamma = 1$, $\delta = 1$ et $m'' = 0.5$. Les variables $\phi$ et $\psi$ varie en fonction du type de super prédateur IG. Pour le super prédateur IG de type 1, $\phi$ et $\psi$ valent tous deux 1: le super prédateur IG convertit efficacement le prédateur et la proie en reproduction. Pour le super prédateur IG de type 2, $\phi$ et $\psi$ valent respectivement 0.2 et 1: le super prédateur IG convertit efficacement le prédateur IG en reproduction, mais pas la proie IG. Pour le super prédateur IG de type 3, $\phi$ et $\psi$ valent respectivement 1 et 0.2: le super prédateur IG convertit efficacement la proie IG en reproduction, mais pas le prédateur IG. Finalement, pour le super prédateur IG de type 1, $\phi$ et $\psi$ valent tous deux 0.2: le super prédateur IG ne convertit pas efficacement les deux autres espèces en reproduction.
 
-Pour les figures 5.1 à 5.4, les conditions énumérées précédemment ne change pas, à l'exception des paramètres suivantes: les valeurs $\alpha$ et $m$ sont fixées à 1 et 0.1, respectivement.
+Pour les figures 5.1 à 5.4, les conditions énumérées précédemment ne changent pas, à l'exception des paramètres suivants: les valeurs $\alpha$ et $m$ sont fixées à 1 et 0.1, respectivement.
 
 
 
 ## Résultats 
-Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatres types de prédateurs.
+Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatre types de super prédateurs IG.
 
-![Figure 4.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 1.](Fig2Condi1A.png)
-
-
-![Figure 4.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 2.](Fig2Condi1B.png)
-
-![Figure 4.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 3.](Fig2Condi1C.png)
-
-![Figure 4.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 4.](Fig2Condi1D.png)
+![Figure 4.1: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1A avec un super prédateur IG de type 1.](Fig2Condi1A.png)
 
 
-Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1997, avec les quatres types de prédateurs.  
+![Figure 4.2: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1A avec un super prédateur IG de type 2.](Fig2Condi1B.png)
+
+![Figure 4.3: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1A avec un super prédateur IG de type 3.](Fig2Condi1C.png)
+
+![Figure 4.4: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1A avec un super prédateur IG de type 4.](Fig2Condi1D.png)
 
 
-![Figure 5.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi2A.png)
+Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1997, avec les quatre types de super prédateurs IG.  
 
 
-![Figure 5.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi2B.png)
+![Figure 5.1: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1B avec un super prédateur IG de type 1.](Fig2Condi2A.png)
 
-![Figure 5.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi2C.png)
 
-![Figure 5.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi2D.png)
+![Figure 5.2: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1B avec un super prédateur IG de type 2.](Fig2Condi2B.png)
+
+![Figure 5.3: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1B avec un super prédateur IG de type 3.](Fig2Condi2C.png)
+
+![Figure 5.4: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1B avec un super prédateur IG de type 4.](Fig2Condi2D.png)
 
 
 ## Interprétation biologique 
