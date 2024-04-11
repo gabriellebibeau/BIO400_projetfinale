@@ -159,7 +159,7 @@ for(i in 0:100){
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
       figure_1A[i+1,j+1] <- 1.5
       
-    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistance stable
+    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistence stable
       figure_1A[i+1,j+1] <- 2.5
     }
 
@@ -169,7 +169,7 @@ for(i in 0:100){
 
 #Visualisation
 image (figure_1A, col = c("cyan2", "salmon", "green", "black"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
-legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
+legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistence stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
 
@@ -212,7 +212,7 @@ for(i in 0:100){
     }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
       figure_1A[i+1,j+1] <- 1.5
       
-    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistance stable
+    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistence stable
       figure_1A[i+1,j+1] <- 2.5
     }
 
@@ -223,7 +223,7 @@ for(i in 0:100){
 
 #Visualisation
 image (figure_1B, col = c("cyan2", "salmon", "green", "black"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
-legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistance stable', 'Prédateur IG exclu'), fill = 1:4)
+legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistence stable', 'Prédateur IG exclu'), fill = 1:4)
 
 ```
 
