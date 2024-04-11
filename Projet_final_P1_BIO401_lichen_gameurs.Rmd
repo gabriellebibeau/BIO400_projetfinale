@@ -182,7 +182,7 @@ library(deSolve)
 figure_1B <- matrix(0.5, 101, 101) #création de la matrice pour faire une image
 lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
             # La mise en place d'une limite où on assume que la densité P, N ou R est égal à 0 permet de mieux modéliser les différents étapes d'équilibre.
-limsd <- 
+limsd <- 0.0001
 steps <- 100 #pas de temps que nous jugeons adéquat pour représenter les états du système
 
 for(i in 0:100){
