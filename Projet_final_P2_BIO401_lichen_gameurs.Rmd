@@ -16,15 +16,17 @@ Les réseaux trophiques ne sont toujours pas modélisés avec précision malgré
 
 ## Introduction
 
-Tout être vivant hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent pour survivre et ce pour ce reproduire. Parfois, cette ressource est un autre hétérotrophe. Dans ce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté. (source)
+Tout être vivant hétérotrophe doit se nourir pour survivre. Ces individus ont alors des relation consommateur-ressource. Ils consomment une ressource disponible dans leur environnement et la convertissent en énergie qu'ils utilisent pour survivre et ce pour ce reproduire. Parfois, cette ressource est un autre hétérotrophe. Dans ce cas, c'est plus spécifiquement une relation proie-prédateur qui occure. Ces relation ont un effet non négligeable sur la taille des populations de ces espèces dans une communauté (@andersson_influence_1977). 
 
-https://www-jstor-org.ezproxy.usherbrooke.ca/stable/3543597?casa_token=J69TNke0_hYAAAAA%3ACEZPYCSNrWJICJG_QbYQbaSIEeVsF_jrE1bL8HcRX5Vdh_YeTUcQfQsmEsK8bipdTLdde7M967HA-KUqvIwb7skomKoD9vO0p8gRaqFcXXnLPUQ9Fhk&seq=4
+Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-resource entre elles. Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie. Ce réseau très complexe comporte presque 200 espèces de plantes vasculaire, environ 150 espèces de vertébrés, une cinquantaine d'espèces d'arachnides, et énormément (tellement qu'on ne peut les compter) d'espèces de microorganismes, d'insectes ainsi que de nématodes (@polis_complex_1991). Toutes ces espèces sont inter-reliée parce qu'elles se consomment entre-elles et font même, pour certaines, du cannibalisme. Contrairement à ce que les cas théoriques populaires modélisent, une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources biotiques (omnivorie). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a minimalement deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateur. Bref, ces grands réseaux trophiques sont si complexes que @polis_complex_1991 juge qu'il est impossible de les étudiés en un seul morceau et les subdivise en six sous-réseaux d'un seulement un est dédié aux vertébrés.
 
-Dans une communauté écologique, il y a plusieurs espèces fauniques, fongiques et floristiques. Il existe donc plusieurs différentes relations du type consommateur-resource entre elles Ces relations forment de grands réseaux reliant toutes les espèces entre elles que l'on nomme réseau trophique. Un exemple bien documenté de réseau trophique est celui de la vallée de Coachella en Californie (Polis 91). DRETTELADRETTELADRETTELADRETTELADRETTELADRETTELA Ce réseau très complexe comporte  Une espèce peu faire partie de plusieurs niveaux trophiques en consommant différentes ressources (biotiques et abiotiques). Il est alors question de prédation intraguilde (PIG). En d'autres mots, il y a deux consommateurs d'une même ressource qui entre eux ont une relation proie-prédateurs.
+Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifiés ce dernier de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à plusieurs équilibres de populations instables. Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême). En d'autres mots, nous avons introduit un prédateur suprême opportuniste (qui veux autant manger le prédateur que la proie) au modèle de @holt_theoretical_1997 basé sur Lotka-Voltera, puis fait varier le type de prédateur pour voir si cela amenait des changement dans les états d'équilibre. 
 
-Dans le passé, plusieurs modèle ont été développés pour illustrer ces relations. Il y a le modèle consommateur-ressource, une généralisation de plusieurs modèles dont le modèle proie-prédateur de Lotka-Voltera. @holt_theoretical_1997 ont bonifiés ce modèle de PIG (une resource consommée par une proie et un prédateur). Ils ont trouvé que cet ajoût menait à plusieurs équilibres de populations instables. 
+#En ce qui attrait notre hypothèse, on induit le changement de réponse fonctionnelle, on peut juste émettre des hypothèses sur l’état d’équilibre
+#On peut estimer que le super prédateur va supplanter le prédateur pour ultimement maintenir un système à 2 consommateurs
+#Ou en fait l’hypothèse mets ce que tu penses, mais on peut juste supposer à quoi la figure aura l’air / le trend de la figure
 
-Nos objectifs sont de déterminer les équilibres alternatifs qui existent dans un cas de PIG complexe comprenant une ressource et trois utilisateurs (proie, prédateur et prédateur suprême) et de comparer ces équilibres avec ceux du modèle de @holt_theoretical_1997 basé sur Lotka-Voltera. Nous croyons que l'ajoût d'un prédateur suprême dans l'écosystème permettra des états alternatifs d'équilibres autant stables que instables. Il y aura certainement six cas d'exclusions : absence de proies, absence de proies et de prédateurs, absence de prédateurs, absence de prédateurs et de prédateurs suprêmes, absence de prédateurs suprêmes ainsi que l'absence de prédateurs suprêmes et de proies. Nous sommes aussi confiants que nous serons capables de trouver un équilibre stable de coexistance entre les quatres partis. Par rapport au résultats de @holt_theoretical_1997, il est fort probable que nous observons une augmentation des taux de réponse fonctionnelle vers la ressource commune et de conversion de la ressource commune en nouveaux individus pour compétitionner avec le prédateur suprême ajouter à l'équation dans un cas de coexistance stable.
+Nous croyons que l'ajoût d'un prédateur suprême dans l'écosystème permettra des états alternatifs d'équilibres autant stables que instables. Il y aura certainement six cas d'exclusions : absence de proies, absence de proies et de prédateurs, absence de prédateurs, absence de prédateurs et de prédateurs suprêmes, absence de prédateurs suprêmes ainsi que l'absence de prédateurs suprêmes et de proies. Nous sommes aussi confiants que nous serons capables de trouver un équilibre stable de coexistance entre les quatres partis. Par rapport au résultats de @holt_theoretical_1997, il est fort probable que nous observons une augmentation des taux de réponse fonctionnelle vers la ressource commune et de conversion de la ressource commune en nouveaux individus pour compétitionner avec le prédateur suprême ajouter à l'équation dans un cas de coexistance stable.
 
 
 ![Figure 1. Schéma du modèle Lotka-Voltera avec PIG incluant un prédateur suprême.](Schema_LV_SPNR.png)
@@ -74,7 +76,7 @@ Ce modèle comporte plusieurs suppositions :
 1. Les réponses fonctionnelles sont des intéractions linéaires et les taux de croissance des populations sont proportionnels aux taux de consommation. 
 
 
-Notre modèle ajoute plusieurs variables au modèle de R.D. Holt et G.A. Polis (1996) pour le complexifier :
+Notre modèle ajoute plusieurs variables au modèle de @holt_theoretical_1997 pour le complexifier :
 $a''$ : la réponse fonctionnelle du prédateur suprême vers la ressource commune;
 $b''$ : le taux de conversion de la consommation de la ressource vers la reproduction du prédateur suprême;
 $m''$ : le taux de mortalité densité-dépendant du prédateur suprême;
@@ -105,11 +107,7 @@ Ce modèle amène alors des suppositions supplémentaires à celles nommées pr�
 
 1. Le prédateur suprême bénéficie des effets positifs de la consommation de la proie et du prédateur de trois façons différentes:
 
-
-
-Les valeurs des paramètres utilisés dans la création de la figure sont inspirés de G. A. Polis (1991) et @holt_theoretical_1997.
-
-https://www-jstor-org.ezproxy.usherbrooke.ca/stable/pdf/2462536.pdf?refreqid=fastly-default%3A9480c9be0a6e17f24489f73ed3d34306&ab_segments=&origin=&initiator=&acceptTC=1
+Les valeurs des paramètres utilisés dans la création de la figure sont inspirés de @polis_complex_1991 et @holt_theoretical_1997.
 
 Voici la procédure pour initialiser le modèle Lotka-Volterra avec prédation intraguilde complexe :
 
@@ -224,27 +222,27 @@ legend('bottomleft', legend = c('Coexistence stable',
 ## Résultats 
 Voici les figures selon les paramètres de la figure 1.A dans @holt_theoretical_1997, avec les quatres types de prédateurs.
 
-![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 1.](Fig2Condi1A)
+![Figure 2.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 1.](Fig2Condi1A.png)
 
 
-![Figure 2.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 2.](Fig2Condi1B)
+![Figure 2.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 2.](Fig2Condi1B.png)
 
-![Figure 2.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 3.](Fig2Condi1C)
+![Figure 2.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 3.](Fig2Condi1C.png)
 
-![Figure 2.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 4.](Fig2Condi1D)
+![Figure 2.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1A avec un super-prédateur de type 4.](Fig2Condi1D.png)
 
 
 Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1997, avec les quatres types de prédateurs.  
 
 
-![Figure 3.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi1A)
+![Figure 3.1: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 1.](Fig2Condi1A.png)
 
 
-![Figure 3.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi1B)
+![Figure 3.2: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 2.](Fig2Condi1B.png)
 
-![Figure 3.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi1C)
+![Figure 3.3: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 3.](Fig2Condi1C.png)
 
-![Figure 3.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi1D)
+![Figure 3.4: États d'équilibres dans un écosystème avec les paramètres énumérées à la figures 1B avec un super-prédateur de type 4.](Fig2Condi1D.png)
 
 
 ## Interprétation biologique 
