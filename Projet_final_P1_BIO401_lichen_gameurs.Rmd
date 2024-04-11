@@ -230,7 +230,7 @@ Les calculs avec le modèle basé sur Schoener n'ont pas été frutueux. Nous av
 ## Résultats
 Pour le premier modèle (basé sur Lotka-Voltera), les figures d'équilibres obtenue selon le choix des paramètres sont les suivantes : 
 
-![Figure 1A. Différents états d'équilibres possibles du modèle proie-prédateur de Lotka-Voltera avec prédation intraguilde. Les paramètres utilisés sont alpha = 1, b = 1, beta = 1, K = 1, m = 0.1, m' = 0.5 et finalement, r = 1.](Fig1A.png)
+![Figure 1A. Différents états d'équilibres possibles du modèle proie-prédateur de Lotka-Voltera avec prédation intraguilde. Les paramètres utilisés sont alpha = 0.5, b = 1, beta = 1, K = 1, m = 0.5, m' = 0.5 et finalement, r = 1.](Fig1A.png)
 
 Dans la figure 1A, les variables $a'$ et $b'$ prennent le rôle de variables dépendante et indépendante respectivement et varient de 0 et 1, alors que les autres variables sont fixés aux valeurs suivantes : 
 
@@ -250,7 +250,7 @@ $m' = 0.5$
 
 $r = 1$
 
-![Figure 1B. Différents états d'équilibres possibles lorsqu'il y a de la prédation intraguilde dans le modèle proie-prédateur de Lotka-Volterra avec les conditions alpha = 0.5, b = 1, beta = 1, K = 1, m = 0.5, m' = 0.5 et finalement, r = 1.](Fig1B.png)
+![Figure 1B. Différents états d'équilibres possibles lorsqu'il y a de la prédation intraguilde dans le modèle proie-prédateur de Lotka-Volterra avec les conditions alpha = 1, b = 1, beta = 1, K = 1, m = 0.1, m' = 0.5 et finalement, r = 1.](Fig1B.png)
 
 Dans la figure 1B, les variables $a'$ et $b'$ reprennent le rôle de variables dépendante et indépendante respectivement, alors que les autres variables sont fixés aux mêmes valeurs qu'à la figure 1A, à deux exceptions  : 
 
