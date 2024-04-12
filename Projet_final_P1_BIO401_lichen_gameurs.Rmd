@@ -124,7 +124,7 @@ CI_LV5 <- c(P=P0, N=N0, R=R0)
 
 
 #Boucle d'équilibre
-grain <- 40 #Résolution de l'image. Un compromis a été fait en la précision et la vitesse d'éxécution du code: un grain plus élevé aurait été souhaitable, mais nous ne croyons pas que cela ai changé drastiquement les résultats (voir Discussion, Figure X)
+grain <- 40 #Résolution de l'image. Un compromis a été fait en la précision et la vitesse d'éxécution du code: un grain plus élevé aurait été souhaitable, mais nous ne croyons pas que cela ai changé drastiquement les résultats.
 figure_1A <- matrix(0.5, grain + 1, grain + 1) #création de la matrice pour faire une image. Le choix d'une matrice de dimensions légèrement plus grande est pour qu'elle puisse contenir les valeurs de 0 à la taille maximale du grain, soit grain +1
 
 lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
