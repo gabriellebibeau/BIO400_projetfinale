@@ -12,7 +12,7 @@ bibliography: BIO401_final.bib
  Zacharie Scalzo : scaz2701@usherbrooke.ca
  
 ### **Résumé**
-Les réseaux trophiques sont rarement modélisés avec l'immense diversité et complexité des véritables écosystèmes (@polis_complex_1991). Pour illustrer la grande différence qu'apporte une espèce supplémentaire à un système, nous avons modifier le modèle proie-prédateur de Lotka-Voltera bonifié de prédation intraguilde simple par @holt_theoretical_1997 pour créer un modèle de prédation intraguilde avec une ressource commune, une proie IG (consomme la ressource), un prédateur IG (consomme la ressource et la proie) et un super prédateur IG (consomme tous les autres). Nous avons alors démontré qu'il existe plusieurs états d'équilibre dans cette communauté.
+Les réseaux trophiques sont rarement modélisés avec l'immense diversité et complexité des véritables écosystèmes (@polis_complex_1991). Pour illustrer la grande différence qu'apporte une espèce supplémentaire à un système, nous avons modifier le modèle proie-prédateur de Lotka-Voltera bonifié de prédation intraguilde simple par @holt_theoretical_1997 pour créer un modèle de prédation intraguilde avec une ressource commune, une proie IG (consomme la ressource), un prédateur IG (consomme la ressource et la proie) et un super prédateur IG (consomme tous les autres). Nous avons alors démontré qu'il existe plusieurs états d'équilibre dans cette communauté, et que qu'un prédateur suprême intraguilde omnivore peut avoir le rôle de régulateur.
 
 ## Introduction
 
@@ -24,7 +24,7 @@ Dans le passé, plusieurs modèles ont été développés pour illustrer ces rel
 
 Super prédateur IG de type 1: Le super prédateur est très bien adapté à la consommation du prédateur IG et de la proie IG. Il convertit donc efficacement ses derniers en reproduction pour lui-même. 
 
-Super prédateur IG de type 2: Super-prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation du prédateur IG, et peu adapté à la consommation de la proie IG. Il convertit donc efficacement seulement le prédateur IG en reproduction pour lui-même.
+Super prédateur IG de type 2: Le super prédateur est très bien adapté à la consommation du prédateur IG, et peu adapté à la consommation de la proie IG. Il convertit donc efficacement seulement le prédateur IG en reproduction pour lui-même.
 
 Super prédateur IG de type 3: Le super prédateur est très bien adapté à la consommation de la proie IG, et peu adapté à la consommation du prédateur IG. Il convertit donc efficacement seulement la proie IG en reproduction pour lui-même.
 
@@ -260,7 +260,48 @@ legend('bottomleft', legend = c('Instable',
                                     'Prédateur suprême IG exlus'),cex=0.7, fill = 1:8)
 ```
 
-Pour les figures 4.1 à 4.4, les variables sont fixées aux conditions énumérées dans la première figure de l'étude originale (@polis_complex_1991), soit: $a = 1$, $\alpha = 0.5$, $b = 1$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$ et $r = 1$. Dans l'étude de Polis publiée en 1991, les variables $a'$ et $b'$ variait de 0 à 1 pour modéliser le changement d'état d'équilibre en fonction de la réponse fonctionnelle du prédateur IG à la ressource et la conversion de ressource en reproduction du prédateur IG. Nous avons choisi de fixer $a'$ et $b'$ à des valeurs qui, selon le modèle de PIG simple, génère une coexistence à l'équilibre entre les trois espèces, soit 1 et 0.6 respectivement (Figure 2 et 3). Les variables $b''$ et $a''$ reprennent donc le rôle de $a'$ et $b'$, soit la réponse fonctionnelle du super prédateur IG à la ressource et la conversion de ressource en reproduction du super prédateur IG. Elles varient de 0 à 1.
+Pour les figures 4.1 à 4.4, les variables sont fixées aux conditions énumérées dans la première figure de l'étude originale (@polis_complex_1991), soit: $a = 1$, $\alpha = 0.5$, $b = 1$, $\beta = 1$, $K = 1$, $m = 0.5$, $m' = 0.5$ et $r = 1$. Dans l'étude de Polis publiée en 1991, les variables $a'$ et $b'$ variait de 0 à 1 pour modéliser le changement d'état d'équilibre en fonction de la réponse fonctionnelle du prédateur IG à la ressource et la conversion de ressource en reproduction du prédateur IG. Nous avons choisi de fixer $a'$ et $b'$ à des valeurs qui, selon le modèle de PIG simple, génère une coexistence à l'équilibre entre les trois espèces, soit 1 et 0.6 respectivement (Figure 2 et 3). 
+
+Les figures montrant la dynamique de la population des 4 espèces ont été généré à l'aide du code suivant. Voici l'exemple pour visualiser l'instabilité du modèle à la figure 4.1.
+
+```{r, eval=FALSE}
+
+parametre_SuperPred <- c(a   <- 1,
+                         a_prime   <- 0.6,
+                         alpha     <- 0.5,
+                         b         <- 1,
+                         b_prime   <- 1,
+                         beta      <- 1,
+                         K         <- 1,
+                         m         <- 0.5,
+                         m_prime   <- 0.5,
+                         r         <- 1,
+                         gamma     <- 1,
+                         delta     <- 1,
+                         phi       <- 1,
+                         psi       <- 1, 
+                         m_doubleprime <- 0.5,
+                         a_doubleprime <- maxi/grain, #maxi est défini selon la plus grande écart-type observé dans la création de l'image, dans                                                             l'axe des y.
+                         b_doubleprime <- maxj/grain) #maxj est défini selon la plus grande écart-type observé dans la création de l'image, dans                                                             l'axe des x.
+
+SuperPred_sol <- ode(y=CI_SuperPred, times= seq(1,3000), func= SuperPred, parms= parametre_SuperPred)
+
+
+ggplot() +
+  geom_line(aes(SuperPred_sol[,'time'], SuperPred_sol[,'S']), color = 'yellow') +
+  geom_line(aes(SuperPred_sol[,'time'], SuperPred_sol[,'P']), color = 'red') +
+  geom_line(aes(SuperPred_sol[,'time'], SuperPred_sol[,'N']), color = 'blue') +
+  geom_line(aes(SuperPred_sol[,'time'], SuperPred_sol[,'R']), color = 'green') +
+  labs(title = "Modèle Lotka-Volterra avec super-prédateur", x = "Temps écoulé (pas de temps)", y = "Nombre d'individus") +
+  theme_minimal()
+```
+
+
+![Figure 2: Dynamique de la population à l'état d'équilibre de coexistence du modèle Lotka-Voltera bonifié de PIG avec les conditions de la Figure 1A .](Équilibre 1 à 0.6 et 1.png)
+
+![Figure 3: Dynamique de la population à l'état d'équilibre de coexistence du modèle Lotka-Voltera bonifié de PIG avec les conditions de la Figure 1B .](Équilibre 2 à 0.6 et 1.png)
+
+Les variables $b''$ et $a''$ reprennent donc le rôle de $a'$ et $b'$, soit la réponse fonctionnelle du super prédateur IG à la ressource et la conversion de ressource en reproduction du super prédateur IG. Elles varient de 0 à 1.
 
 Les autres variables représentent le super prédateur IG opportuniste: $\gamma = 1$, $\delta = 1$ et $m'' = 0.5$. Les variables $\phi$ et $\psi$ varie en fonction du type de super prédateur IG. Pour le super prédateur IG de type 1, $\phi$ et $\psi$ valent tous deux 1: le super prédateur IG convertit efficacement le prédateur et la proie en reproduction. Pour le super prédateur IG de type 2, $\phi$ et $\psi$ valent respectivement 0.2 et 1: le super prédateur IG convertit efficacement le prédateur IG en reproduction, mais pas la proie IG. Pour le super prédateur IG de type 3, $\phi$ et $\psi$ valent respectivement 1 et 0.2: le super prédateur IG convertit efficacement la proie IG en reproduction, mais pas le prédateur IG. Finalement, pour le super prédateur IG de type 1, $\phi$ et $\psi$ valent tous deux 0.2: le super prédateur IG ne convertit pas efficacement les deux autres espèces en reproduction.
 
@@ -293,12 +334,61 @@ Voici les figures selon les conditions de la figure 1.B dans @holt_theoretical_1
 ![Figure 5.4: États d'équilibres dans un écosystème avec les paramètres énumérés à la figures 1B avec un super prédateur IG de type 4.](Fig2Condi2D.png)
 
 ## Interprétation biologique 
-###1. Figure 4.1 à 4.4
+###1. Interprétation des figures 4.1 à 4.4
+#### Figure 4.1
+Il est possible de remarquer plusieurs états d'équilibre différents sur la figure 4.1, soit de gauche-bas à haut-droite, le prédateur suprême IG exclu, une coexistence stable, le prédateur IG exclu et finalement le prédateur IG et la proie IG exclus. La transition entre les 3 premiers états d'équilibre énumérés sont parsemé de zones d'instabilités. Dans le quadrant en bas à gauche, le prédateur suprême de type 1 est très peu compétitif pour s'accaparer et profiter de la ressource commune, ce qui explique son exclusion. Plus il est compétitif, plus il prends de la place dans l'environnement, coexistant d'abord avec le prédateur IG et la proie IG, et ensuite en les excluant complètement, le prédateur en premier. 
+
+Les instabilités semble être aux transition avec l'état d'équilibre de coexistence. Il est à noté que R.D. Holt et G.A. Polis (1997) avait prédit ce phénomène dans leur modèle proie-prédateur de Lotka-Voltera bonifié de PIG (@polis_complex_1991). Par contre, les régions d'instabilités sur la figure sont difficilement interprétables: elles semble clairement vouloir se stabiliser à long terme, mais on un écart-type supérieur à 0.0001 (figure 6).
+
+![Figure 6: Dynamique dans une région instable de la figure 4.1. La ressource, en vert; la proie IG, en bleue; le prédateurIG, en rouge; et finalement, le prédateur suprême IG, en jaune.](Max Instabilité Fig2Condi1A.png)
+
+On pourrait donc supposé que plus le prédateur suprême IG de type 1 est adapté à la ressource, plus il est compétitif et est capable d'exclure complètement les autres membres hétérotrophes de la communauté. Ceci pourrait être dû à sa grande capacité à profiter des bénifices de s'alimenter de ses derniers.
+
+#### Figure 4.2
+La figure 4.2 ressemble beaucoup à la figure 4.1, mais la zone d'exlusion du prédateur sûpreme IG est beaucoup plus grande. Le prédateur IG n'est jamais le seul à être exclue: en fait, étrangement, il semble être exclue, pour une petit région de la figure, avec le prédateur suprême IG. Ceci pourrait être explicable au fait que le prédateur suprême IG dévore les prédateurs IG à un tel point que sa survie en est affecté: il est ensuite incapable de compétitionner avec la proie pour la ressource (Figure 7).
+
+![Figure 7: Dynamique dans une région où le prédateur suprême IG et le prédateur IG sont exclue de la figure 4.2. La ressource, en vert; la proie IG, en bleue; le prédateurIG, en rouge; et finalement, le prédateur suprême IG, en jaune. ](Fig2Condi1B superpred et pred exclu 300.png)
+Or, le nombre de pas ne nous donne pas l'histoire complète. Si on augmente de 10 fois le nombre de pas, nous obtenons une coexistence qui approche l'équilibre (Figure 8).
+
+![Figure 8: Dynamique dans une région où le prédateur suprême IG et le prédateur IG sont exclue de la figure 4.2. La ressource, en vert; la proie IG, en bleue; le prédateurIG, en rouge; et finalement, le prédateur suprême IG, en jaune. ](Fig2Condi1B superpred et pred exclu 3000.png)
+Néanmoins, le prédateur suprème est grandement déprécié en nombre dans cette situation. Ce changement d'état selon le pas de temps se répète dans la zone où il y a le plus d'instabilité (écart-type le plus grand). Ceci suggère qu'un pas de temps beaucoup plus grand que ce que nous avons prédit mieux les tendances à long terme de l'état des 4 espèces.
+
+En résumé, le prédateur supreme IG de type 2, bien adapté à consommer le prédateur mais non la proie, semble beaucoup moins compétitif s'il est mal adapté à consommé la ressource. Il n'y a pas de coexistence, mais ceci pourrait être dû au choix du pas de temps. Encore une fois, lorsqu'il est très compétitif, le prédateur suprême IG supplante tous les autres.
+
+#### Figure 4.3
+La figure 4.3 suit la même logique que les deux autres figures, mais avec l'absence de zones d'instabilité. En effet, l'état d'équilibre transitionne drastiquement d'un état à un autre. Cela pourrait être dû au fait que le prédateur suprême IG de type 3, bien adapté à consommer la proie IG, exclue rapidement le prédateur IG en s'accaparant de la proie IG, sans aucune coexistance possible. Finalement, lorsque le prédateur suprême IG devient très bien adapté à la ressource, il exclue tous les autres.
+
+#### Figure 4.4
+La figure 4.3 suit la même logique que les trois autres figures, mais avec l'absence de zones d'exclusion du prédateur IG seulement et de coexistance stable. De plus, la zone d'exclusion du prédateur suprême IG de type 4 est la plus grande, suggérant que lorsqu'il est peu adapté à consommer le prédateur et la proie, il ne peut compétitionner pour la ressource. Lorsqu'il devient compétitif pour consommer la ressource, il suplante les deux autres hétérotrophes. 
+
+Il y a quelques zones d'instabilité, mais suite à une analyse plus approfondie, il s'agit d'une erreur causé par le choix du pas de temps. En effet, il s'agierait plutôt de zone où le prédateur suprême et la proie sont exclue, comme dans la figure 4.2. Cela n'arrive seulement pas assez rapidement. (Figure 9)
 
 
+![Figure 9: Dynamique dans une région où le prédateur suprême IG et le prédateur IG sont exclue de la figure 4.2 ](Instabilité Fig 2Condi1D.png)
+###2. Interprétation des figure 5.1 à 5.4
+#### Figure 5.1
+La figure 5.1 est très intéressante, puisqu'elle représente un cas où le prédateur IG de type 1 est complètement absent. De cette façon, elle est presque identique à la figure 1B de notre interprétation du modèle proie-prédateur de Lotka-Voltera bonifié de PIG par R.D. Holt et G.A. Polis (1997). Il se pourrait que le succès du prédateur IG qui, rappelons-nous, possède désormais une plus grande réponse fonctionnelle à la proie, et celle-ci un taux de mortalité plus bas, bonifierait le prédateur suprême avec une abondance de ressource qui le rend trop nombreux. Ceci pourrait donc rendre le prédateur suprême IG trop dangereux pour le prédateur IG, menant à sont exclusion. La dynamique de population à l'état d'équilibre d'exlusion du prédateur suprême semble corroborer (Figure 10).
 
-###2. Figure 5.1 à 5.4
+Super instabilité Condi2B
+
+![Figure 10: Dynamique dans une région où le prédateur IG est exclue de la figure 5.1 ](Exclusion pred Figure 2 Condi2A.png)
+#### Figure 5.2
+La figure 5.2 possède une énorme zone de coexistance, ainsi qu'une zone d'exclusion du prédateur suprême IG de type 2 lorsque celui-ci n'est pas compétitif à la consommation de la ressource. La zone d'instabilité est particulièrement intéressante, puisqu'il s'agit d'une véritable zone d'instabilité, peut importe le pas de temps (Figure 11).
 
 
+![Figure 11: Dynamique dans une région où le prédateur IG est exclue de la figure 5.1 ](Super instabilité Condi2B.png)
+Ceci suggère que le prédateur suprême IG de type 2 apporte une stabilité au système dans la majorité des cas, en contrôlant la population de prédateur IG. Lorsque le prédateur suprême de type 2 devient très compétitif pour la ressource, la proie IG et le prédateur IG disparaissent. 
+
+#### Figure 5.3
+La figure 5.3 suit la même logique que la figure 4.3, mais avec un prédateur suprême IG de type 3 moins compétitif dans l'environnement différent que font la deuxième suite de paramètres. Il se pourrait que le prédateur, bien adapté à consommr la proie, soit capable de tenir tête plus longtemps au prédateur suprême IG de type 3. 
+
+#### Figure 5.3
+La figure 5.4 suit la même logique que la figure 4.4, mais avec une zone de coexistance au lieu d'une zone d'exclusion du prédateur IG et de la proie IG. Ceci suggère que la réduction de la mortalité de la proie IG ainsi que l'augmentation de la capacité du prédateur IG à ce nourrir de la proie, maintenant plus abondante, soit un bon tampon à un prédateur suprême IG de type 4 très compétitif pour la ressource, mais peu adapté à ce nourrir de la porie et du prédateur IG. De plus, comparativement à la figure 1B du modèle proie-prédateur de Lotka-Voltera bonifié de PIG par R.D. Holt et G.A. Polis (1997), la proie IG n'est jamais exclue: il semblerait que, lorsque très compétitif pour la ressource, le prédateur suprême IG de type 4 soit capable de contrôler la population de prédateur IG, imposant ainsi une coexistance stable. Une touche d'instabilité lorsque le prédateur suprême IG est à son plus compétitif pour la ressource suggère que, dans cette situation, l'équilibre qu'il impose est plus fragile.
+
+### Résumé de l'interprétation biologique
+
+Pour conclure, l'ajout d'un prédateur suprême IG n'a pas augmenté la coexistance de tous les espèces comparativement au modèle proie-prédateur de Lotka-Voltera bonifié de PIG, mais elle semble avoir favorisé la coexistance du prédateur IG et de la proie. En effet, dans certain cas, il semblerait que le prédateur suprême joue un rôle de régulateur de la population de prédateur IG. Cette hypothèse est basé entre autre sur le fait qu'aucun état où le prédateur IG exclue le prédateur suprême IG ainsi que la proie IG n'a été observé. Le système prédateur IG-proie IG est souvent tolérant d'un prédateur suprême IG peu compétitif pour la ressource. L'ajout d'un prédateur suprême IG a aussi apporté une plus grande diversité d'état d'équilibre ainsi que, dans de rares occasions, un réel état d'instabilité dans une communauté de proie IG, prédateur IG, ressource commune, et lui même. Cela nous permet donc de confirmer les résultats de Andersson 1997, soit que l'ajout d'omnivores généralistes a tendance à stabiliser la coexistence dans une communauté.
+
+Pour conclure, cette étude aurait bénéficier d'un appareil d'analyse plus puissant. En effet, d'augmenté la résolution des figures ainsi que les pas de temps aurait permis d'avoir une idée plus nette de la réalité des intéractions entres les 4 espèces à long terme. Cependant, tel que mentionné dans @polis_complex_1991, il est possible qu'en pratique, cela ne soit pas représentatif de la réalité. En effet, une population peut atteindre un seuil critique qui la mènera à l'extinction local. Nos modèles montre parfois, comme pour Polis 1991, des espèces dont la population descend à un seuil si bas qu'en nature elle sera éteinte, pour ensuite remonter à une population plusieurs dizaines d'ordres de grandeurs plus populeuse (l'équivalent,dans le cas de la figure 4.2, que si la population du prédateur suprême passait de 1 à 1X10^35, soit plus que le nombre total de cellules sur Terre). De plus, lorsque le nombre de pas de temps est très grand, les paramètres peuvent changé: les processuss évolutifs influencent à long terme les populations de vivant, et nôtre modèle aurait besoin de beaucoup d'équations pour prédire cela.
 
 ## Références
