@@ -111,7 +111,8 @@ LV5 <- function(t, ConI, parms5 = c(a,a_prime,alpha,b,b_prime,beta,K,m,m_prime,r
 ```
 
 
-Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde (Figure 1A). Les variables $b'$ et $a'$ prennent le rôle de variables dépendantes et indépendantes respectivement. Elle varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes. $\alpha$ = 0.5, $b$ = 1, $\beta$ = 1, $K$ = 1, $m$ = 0.5, $m'$ = 0.5 et finalement, $r$ = 1.
+Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde. Les variables $b'$ et $a'$ prennent le rôle de variables dépendantes et indépendantes respectivement. Elle varient de 0 à 1. Les autres variables sont fixées aux valeurs suivantes. $\alpha$ = 0.5, $b$ = 1, $\beta$ = 1, $K$ = 1, $m$ = 0.5, $m'$ = 0.5 et finalement, $r$ = 1. L'exemple ci-dessous représente le calcul qui a générer la figure 1A de l'article de Holt et Polis (Figure 1A).
+
 ```{r, eval=FALSE}
 library(deSolve)
 
@@ -123,19 +124,28 @@ CI_LV5 <- c(P=P0, N=N0, R=R0)
 
 
 #Boucle d'équilibre
-figure_1A <- matrix(0.5, 101, 101) #création de la matrice pour faire une image
+grain <- 40 #Résolution de l'image. Un compromis a été fait en la précision et la vitesse d'éxécution du code: un grain plus élevé aurait été souhaitable, mais nous ne croyons pas que cela ai changé drastiquement les résultats (voir Discussion, Figure X)
+figure_1A <- matrix(0.5, grain + 1, grain + 1) #création de la matrice pour faire une image. Le choix d'une matrice de dimensions légèrement plus grande est pour qu'elle puisse contenir les valeurs de 0 à la taille maximale du grain, soit grain +1
+
 lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
             # La mise en place d'une limite où on assume que la densité P, N ou R est égal à 0 permet de mieux modéliser les différents étapes d'équilibre.
-steps <- 300 #temps auquel l'équilibre aura surement été atteint
 
-for(i in 0:100){
-  for(j in 0:100){
+limsd <- 0.0001 #Pour vérifier si la fonction est à l'équilibre ou non, nous comparons l'écart type des derniers 10% des termes à un écart-type que nous jugeons représentatif d'un système à l'équilibre, ou en voie de le devenir (Fig X). 
+steps <- 300 #temps auquel l'équilibre aura surement été atteint. A été trouvé, de concert avec le terme "limsd", à tâton.
+
+
+maxsd<- 0 # Paramètre d'une fonction qui trouve la plus grande instabilité. Elle enregistre le plus grand écart-type des 10 derniers pourcent.
+maxi <- 0 # Paramètre qui enregistre la valeur de a' où est généré la plus grande instabilité
+maxj <- 0 ## Paramètre qui enregistre la valeur de b' où est généré la plus grande instabilité
+
+for(i in 0:grain){
+  for(j in 0:grain){
     
     parametre_LV5 <- c(a <- 1, #paramètres a' et b' varient entre 0 et 1
-               a_prime <- i/100,
+               a_prime <- i/grain,
                alpha     <- 0.5,
                b         <- 1,
-               b_prime <- j/100,
+               b_prime <- j/grain,
                beta      <- 1,
                K         <- 1,
                m         <- 0.5,
@@ -147,10 +157,23 @@ for(i in 0:100){
     
     #Classement des équilibres
    
-    if(sd(LV5_sol[(0.75*steps):steps,'P']) > limsd & sd(LV5_sol[(0.75*steps):steps,'N']) > limsd){ #Instable
+    
+    if(sd(LV5_sol[(0.9*steps):steps,'P']) > limsd | sd(LV5_sol[(0.9*steps):steps,'N']) > limsd){ #Instable
       figure_1A[i+1,j+1] <- 3.5 
+      
+      # Fonction qui trouve l'endroit avec le plus d'instabilité
+      if(sd(LV5_sol[(0.9*steps):steps,'P']) > maxsd){
+        maxsd <- sd(SuperPred_sol[(0.9*steps):steps,'P'])
+        maxi <- i
+        maxj <- j
+        
+        if(sd(LV5_sol[(0.9*steps):steps,'N']) > maxsd){
+          maxsd <- sd(SuperPred_sol[(0.9*steps):steps,'N'])
+          maxi <- i
+          maxj <- j
+    
       print(paste("i = ", i, "with a sd of:",(sd(LV5_sol[(0.9*steps):steps,'P'])),"j = ", j, "with a sd of:",(sd(LV5_sol[(0.9*steps):steps,'N']))))
-      #Code pour trouver les positions des endroits avec de l'instabilité, et intepréter graphiquement le résultat
+      #Code pour trouver les positions des endroits avec de l'instabilité, et en intepréter graphiquement le résultat
     
     
     }else if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
@@ -173,62 +196,42 @@ legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistence st
 
 ```
 
-Voici la procédure pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde  (Figure 1B). On reprend ce qui a été fait pour la figure 1A, mais on change certains paramètres. Les variables $b'$ et $a'$ reprennent le rôle de variables dépendante et indépendante respectivement. Les autres variables sont fixées aux mêmes valeurs que précédemment, à l'exception de  $\alpha$, qui passe de 0.5 à 1, et $m$, qui passe de 0.5 à 0.1. Ceci représente un cas où la mortalité densité-spécifique de la proie diminue, et que la réponse fonctionnelle du prédateur à la proie augmente.
+Pour modéliser l'équation différentielle de Lotka-Volterra avec prédation intraguilde  (Figure 1B), nous avons repris la même démarche, tout en changeant certains paramètres. Les variables $b'$ et $a'$ reprennent le rôle de variables dépendante et indépendante respectivement. Les autres variables sont fixées aux mêmes valeurs que précédemment, à l'exception de  $\alpha$, qui passe de 0.5 à 1, et $m$, qui passe de 0.5 à 0.1. Ceci représente un cas où la mortalité densité-spécifique de la proie diminue, et que la réponse fonctionnelle du prédateur à la proie augmente.
+
+Lors de notre expérimentation, nous avons remarqué que le résultat de la simulation du modèle changeait en fonction du nombre de pas de temps choisis. Ceci nous a poussé à tenter de voir graphiquement le comportement des populations en état d'instabilité pour en comprendre la cause. Voici la procédure pour comprendre l'état d'instabilité supposément présente à la figure 2.
 
 ```{r, eval=FALSE}
-library(deSolve)
 
-#Boucle d'équilibre
-figure_1B <- matrix(0.5, 101, 101) #création de la matrice pour faire une image
-lim <- 0.01 #Puisque le résultat de l'équation différentiel peut s'approcher de 0 sans ne jamais l'atteindre, les conditions P, N et R = 0 peuvent ne jamais être atteinte.
-            # La mise en place d'une limite où on assume que la densité P, N ou R est égal à 0 permet de mieux modéliser les différents étapes d'équilibre.
-limsd <- 0.0001
-steps <- 300 #pas de temps que nous jugeons adéquat pour représenter les états du système
-
-for(i in 0:100){
-  for(j in 0:100){
-    
-    parametre_LV5 <- c(a <- 1, #paramètres (a' et b' variables entre 0 et 1)
-               a_prime <- i/100,
-               alpha     <- 1, #passage de 0.5 à 1 pour la figure 1 B. La réponse fonctionnelle du prédateur intraguilde à la proie augmente
-               b         <- 1,
-               b_prime <- j/100,
-               beta      <- 1,
-               K         <- 1,
-               m         <- 0.1, #passage de 0.5 à 0.1 pour la figure 1 B. La mortalité dénsité/indépendante de la proie diminue
-               m_prime   <- 0.5,
-               r         <- 1)
-
-    #Solution du système d'équation
-    LV5_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
-    
-    #Classement des équilibres
-    if(sd(LV5_sol[(0.75*steps):steps,'P']) > limsd & sd(LV5_sol[(0.75*steps):steps,'N']) > limsd){ #Instable
-      figure_1A[i+1,j+1] <- 3.5 
-    
-    }else if(LV5_sol[steps,'P'] < lim & LV5_sol[steps,'N'] > lim){ #Prédateur IG exclus
-      figure_1A[i+1,j+1] <- 0.5 #pour être entre 0 et 1 et faire partie de la 1re catégorie de la fonction image
-      
-    }else if(LV5_sol[steps,'P'] > lim & LV5_sol[steps,'N'] < lim){ #Proie IG exclus
-      figure_1A[i+1,j+1] <- 1.5
-      
-    }else if(LV5_sol[steps,'P']  > lim & LV5_sol[steps,'N']  > lim){ #Coexistence stable
-      figure_1A[i+1,j+1] <- 2.5
-    }
+##Affichage des coordonnées de la plus grande instabilité
+print(paste(maxsd,"at", maxi, "and", maxj))
 
 
-  } #Fin boucle j
-} #Fin boucle i
+##Modélisation de la plus grande instabilité avec les paramètres de la figure d'état d'équilibre
+parametre_LV5 <- c(a   <- 1,
+                   a_prime   <- maxi/grain,
+                   alpha     <- 1,
+                   b         <- 1,
+                   b_prime   <- maxj/grain,
+                   beta      <- 1,
+                   K         <- 1,
+                   m         <- 0.1,
+                   m_prime   <- 0.5,
+                   r         <- 1,)
+
+SuperPred_sol <- ode(y=CI_LV5, times= seq(1,steps), func= LV5, parms= parametre_LV5)
 
 
-#Visualisation
-image (figure_1B, col = c("cyan2", "salmon", "green", "black"), breaks = 0:4, xlab = 'b_prime' , ylab = 'a_prime')
-legend(x = 'bottomleft', legend = c('Instable', 'Proie IG exclu','Coexistence stable', 'Prédateur IG exclu'), fill = 1:4)
+ggplot() +
+  geom_line(aes(LV5_sol[,'time'], LV5_sol[,'P']), color = 'red') +
+  geom_line(aes(LV5_sol[,'time'], LV5_sol[,'N']), color = 'blue') +
+  geom_line(aes(LV5_sol[,'time'], LV5_sol[,'R']), color = 'green') +
+  labs(title = "Modèle Lotka-Volterra bonifié avec prédation intraguilde", x = "Temps écoulé (pas de temps)", y = "Nombre d'individus") +
+  theme_minimal()
 
 ```
 
 ***
-Les calculs avec le modèle basé sur Schoener n'ont pas été frutueux. Nous avons donc décidé de ne pas les afficher et de s'en tenir qu'à un seul modèle pour la suite. 
+Nous n'avons pas été en mesure de reproduire les figures générer par le modèle de Shoener avec PIG. En effet, les paramètres ainsi que les pas de temps ne sont pas définies, ce qui rends impossible de bien paramétrer le modèle. Nous avons donc décidé de ne pas les afficher et de s'en tenir qu'à un seul modèle pour la suite. 
 ***
 
 ## Résultats
@@ -264,13 +267,25 @@ $m$ = 0.1. Ceci représente un cas où la mortalité densité-spécifique de la 
 
 ***
 ## Interprétations biologiques
-L'hypothèse de départ était qu'il y avait une création de plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Le modèle proie-prédateur de Lotka-Voltera bonifié de PIG a été utilisé pour tester cette hypothèse. 
+L'hypothèse de départ était qu'il y avait plusieurs états alternatifs stables lorsqu'on ajoutait de la prédation IG dans des modèles préexistants. Le modèle proie-prédateur de Lotka-Voltera bonifié de PIG a été utilisé pour tester cette hypothèse. 
 
 D'abord, la figure 1A permet d'observer qu'il existe 3 états d'équilibres : une absence totale de proie IG, une absence totale de prédateur IG et une coexistence. Lorsque la réponse fonctionnelle du prédateur IG vers la ressource commune et le taux de conversion de la ressource sont bas (somme en bas de 1.6), le prédateur IG est toujours exclu. On pourrait en comprendre que le prédateur IG n'arrive pas assez à subvenir à ces besoins avec si peu de gains dans ces conditions. Lorsque les deux taux étaient très élevés (somme au dessus de 1.8), c'est plutôt la proie IG qui était toujours exclue. On peut en déduire que le prédateur IG est trop compétitif pour la ressource commune en ces conditions pour permettre à la proie IG de survivre. Finalement, une coexistence stable semble se produire lorsque la somme des deux mêmes taux se trouve entre 1.5 et 1.8. On peut alors interpréter qu'il y a un équilibre fragile dans la compétition pour la ressource commune entre la proie IG et le prédateur IG et que c'est seulement en ces conditions qu'ils coexistent sans modifier leur taille de population. 
 
 Ensuite, la figure 1B représente une situation assez différente de la figure 1A avec un taux de mortalité densité-dépendant de la proie IG diminué et une réponse fonctionnelle du prédateur IG à la proie augmentée. Il est alors possible d'observer seulement 2 états : la coexistence stable et l'exclusion de la proie IG. L'état d'exclusion du prédateur IG semble avoir disparu par rapport à la figure 1A. Cela pourrait s'expliquer par la réponse fonctionnelle du prédateur IG à la proie qui a augmenté. En effet, il se pourrait qu'il ait assez augmenté pour que cela soit impossible que la population de prédateur IG s'éteigne. L'exclusion de la proie IG est encore présente, mais en moins grande proportion dans la figure 1B que dans la figure 1A (somme des deux axes au-dessus de 1.9 environ). Cela est logique, car la mortalité de la proie IG a été diminuée; la proie IG devrait mieux survivre et sa population moins s'éteindre. La coexistence occupe la majorité des cas possibles pour les valeurs de réponse fonctionnelle du prédateur IG vers la ressource commune et de taux de conversion de la ressource. Cela est probablement dû à l'effet combiné d'une plus grande consommation de la proie IG par le prédateur IG, mais une meilleure survie globale de la proie IG.
 
-Finalement, il est à noter que toutes les figures ont été produites à 300 pas de temps pour avoir la certitude que l'équilibre était atteint. Or, des instabilités exactement comme dans l'article de R.D. Holt et G.A. Polis (1997) étaient visibles à 100 pas de temps (les valeurs n'avaient pas encore convergé vers l'équilibre), et ce dans la figure 1A et la figure 1B. Cela pourrait expliquer en partie pourquoi nous obtenons des résultats différents de l'article. Nous concluons donc que l'article est difficilement reproductible puisqu'il ne définit pas bien comment reproduire l'état de stabilité et que cet état peut être trouvé à différent pas de temps sous différentes formes.
+Finalement, il est à noter que toutes les figures ont été produites à 300 pas de temps pour avoir la certitude que l'équilibre était atteint. Or, des instabilités à des endroits approximativement similaire à ce qui est observé dans l'article de R.D. Holt et G.A. Polis (1997) étaient visibles à 100 pas de temps (les valeurs n'ont pas encore convergé vers l'équilibre), et ce dans la figure 1A et la figure 1B (Figure 2). 
+
+![Figure 2: Figure 1B avec un pas de temps de 100.](Fig1B 100 pas de temps.png)
+Lorsque l'on observe l'état d'instabilité supposé à 100 pas de temps, on remarque qu'il s'agit en fait d'une atténuation des cycles qui, après assez de temps, disparait et atteint l'équilibre (Figure 3 et 4).
+
+![Figure 3: Dynamique des populations à la zone d'instabilité sur 100 pas de temps.](Max instabilité modèle 1 100 pas.png)
+Cela est mis en évidence lorsqu'on compare avec la dynamique des populations après 300 pas de temps.
+
+![Figure 4: Dynamique des populations à la zone d'instabilité sur 300 pas de temps.](Max instabilité modèle 1 300 pas.png)
+
+Cela pourrait expliquer en partie pourquoi nous obtenons des résultats différents de l'article. Nous concluons donc que l'article est difficilement reproductible puisqu'il ne définit pas bien comment reproduire l'état de stabilité et que cet état peut être trouvé à différent pas de temps sous différentes formes.
+
+L'hypothèse de R.D. Holt et G.A. Polis (1997) est plausible: la prédation intraguilde ajoute en effet plusieurs états alternatifs d'équilibre à une communauté. Par contre, nos résultats semblent mettre en doute les zones d'instabilité des figures de R.D. Holt et G.A. Polis (1997), ce qui aurait en effet ajouté beaucoup de complexité à un système simple de consommateur-ressource. Il aurait été intéressant que les auteurs n'ai pas seulement fait varié $a'$ et $b'$ dans leurs figures, mais d'autres combinaisons. Peut-être, alors, aurions nous réellement vu des états alternatifs d'instabilité.
 
 ***
 ***
